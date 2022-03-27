@@ -1,0 +1,57 @@
+<svg viewBox="0 0 28 49" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="13.97" y1="10.658" x2="13.97" y2="38.126" id="gradient-0">
+      <stop offset="0" style="stop-color: rgb(67, 67, 67);"></stop>
+      <stop offset="1" style="stop-color: rgb(130, 130, 130);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="13.97" y1="10.658" x2="13.97" y2="38.126" id="gradient-1" gradientTransform="matrix(1, 0, 0, 1, 13.945697, 24.151607)">
+      <stop offset="0" style="stop-color: rgb(67, 67, 67);"></stop>
+      <stop offset="1" style="stop-color: rgb(130, 130, 130);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="13.97" y1="10.658" x2="13.97" y2="38.126" id="gradient-2" gradientTransform="matrix(1, 0, 0, 1, 13.972021, -24.235687)">
+      <stop offset="0" style="stop-color: rgb(67, 67, 67);"></stop>
+      <stop offset="1" style="stop-color: rgb(130, 130, 130);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="13.97" y1="10.658" x2="13.97" y2="38.126" id="gradient-3" gradientTransform="matrix(1, 0, 0, 1, -14.013457, -24.290592)">
+      <stop offset="0" style="stop-color: rgb(67, 67, 67);"></stop>
+      <stop offset="1" style="stop-color: rgb(130, 130, 130);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="13.97" y1="10.658" x2="13.97" y2="38.126" id="gradient-4" gradientTransform="matrix(1, 0, 0, 1, -14.042226, 24.254922)">
+      <stop offset="0" style="stop-color: rgb(67, 67, 67);"></stop>
+      <stop offset="1" style="stop-color: rgb(130, 130, 130);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="-0.044" y1="-13.633" x2="-0.044" y2="13.835" id="gradient-5">
+      <stop offset="0" style="stop-color: rgb(129, 129, 129);"></stop>
+      <stop offset="1" style="stop-color: rgb(70, 70, 70);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="27.942" y1="-13.578" x2="27.942" y2="13.89" id="gradient-6">
+      <stop offset="0" style="stop-color: rgb(129, 129, 129);"></stop>
+      <stop offset="1" style="stop-color: rgb(70, 70, 70);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="13.97" y1="10.658" x2="13.97" y2="38.126" id="gradient-7">
+      <stop offset="0" style="stop-color: rgb(129, 129, 129);"></stop>
+      <stop offset="1" style="stop-color: rgb(70, 70, 70);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="-0.072" y1="34.913" x2="-0.072" y2="62.381" id="gradient-8">
+      <stop offset="0" style="stop-color: rgb(129, 129, 129);"></stop>
+      <stop offset="1" style="stop-color: rgb(70, 70, 70);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="27.915" y1="34.809" x2="27.915" y2="62.277" id="gradient-9">
+      <stop offset="0" style="stop-color: rgb(129, 129, 129);"></stop>
+      <stop offset="1" style="stop-color: rgb(70, 70, 70);"></stop>
+    </linearGradient>
+  </defs>
+  <line style="fill: rgba(113, 208, 255, 0.54); stroke: rgba(112, 196, 255, 0.65);" x1="1.602" y1="17.27" x2="13.944" y2="10.327"></line>
+  <line style="fill: rgba(113, 208, 255, 0.54); stroke: rgba(112, 196, 255, 0.65);" x1="26.304" y1="17.173" x2="26.363" y2="31.298"></line>
+  <line style="fill: rgba(113, 208, 255, 0.54); stroke: rgba(112, 196, 255, 0.65);" x1="1.587" y1="31.631" x2="14.087" y2="38.694"></line>
+  <line style="fill: rgba(113, 208, 255, 0.54); stroke: rgba(112, 196, 255, 0.65);" x1="15.49" y1="41.413" x2="27.943" y2="34.325"></line>
+  <line style="fill: rgba(113, 208, 255, 0.54); stroke: rgba(112, 196, 255, 0.65);" x1="12.23" y1="6.967" x2="12.304" y2="0.05"></line>
+  <line style="fill: rgba(113, 208, 255, 0.54); stroke: rgba(112, 196, 255, 0.65);" x1="12.18" y1="48.984" x2="12.247" y2="41.508"></line>
+  <line style="fill: rgba(113, 208, 255, 0.54); stroke: rgba(112, 196, 255, 0.65);" x1="15.531" y1="7.53" x2="28.089" y2="14.362"></line>
+  <polygon style="stroke: rgb(73, 73, 73); fill: rgb(67, 67, 67);" points="2.042 17.389 13.928 10.658 25.962 17.381 25.802 31.029 14.125 38.126 1.978 31.367"></polygon>
+  <polygon style="stroke: rgb(73, 73, 73); fill: rgb(67, 67, 67);" points="15.987 41.54 27.873 34.809 39.907 41.532 39.747 55.18 28.07 62.277 15.923 55.518"></polygon>
+  <polygon style="stroke: rgb(73, 73, 73); fill: rgb(67, 67, 67);" points="16.014 -6.847 27.9 -13.578 39.934 -6.855 39.774 6.793 28.097 13.89 15.95 7.131"></polygon>
+  <polygon style="stroke: rgb(73, 73, 73); fill: rgb(67, 67, 67);" points="-11.972 -6.902 -0.086 -13.633 11.948 -6.91 11.788 6.738 0.111 13.835 -12.036 7.076"></polygon>
+  <polygon style="stroke: rgb(73, 73, 73); fill: rgb(67, 67, 67);" points="-12 41.644 -0.114 34.913 11.92 41.636 11.76 55.284 0.083 62.381 -12.064 55.622"></polygon>
+  <polygon style="fill: none; stroke: rgba(127, 225, 255, 0.4); stroke-width: 0.5px;" points="14 0 14 8.25 28 16.25 28 32.8 13.899999618530273 40.5 14.008999824523926 48.97800064086914 14 40.5 0 32.75 0 16.25 14 8.25"></polygon>
+</svg>

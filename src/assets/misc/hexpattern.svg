@@ -1,0 +1,29 @@
+<svg viewBox="0 0 28 49" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="13.97" y1="10.658" x2="13.97" y2="38.126" id="gradient-0">
+      <stop offset="0" style="stop-color: rgb(67, 67, 67);"></stop>
+      <stop offset="1" style="stop-color: rgb(130, 130, 130);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="13.97" y1="10.658" x2="13.97" y2="38.126" id="gradient-1" gradientTransform="matrix(1, 0, 0, 1, 13.945697, 24.151607)">
+      <stop offset="0" style="stop-color: rgb(67, 67, 67);"></stop>
+      <stop offset="1" style="stop-color: rgb(130, 130, 130);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="13.97" y1="10.658" x2="13.97" y2="38.126" id="gradient-2" gradientTransform="matrix(1, 0, 0, 1, 13.972021, -24.235687)">
+      <stop offset="0" style="stop-color: rgb(67, 67, 67);"></stop>
+      <stop offset="1" style="stop-color: rgb(130, 130, 130);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="13.97" y1="10.658" x2="13.97" y2="38.126" id="gradient-3" gradientTransform="matrix(1, 0, 0, 1, -14.013457, -24.290592)">
+      <stop offset="0" style="stop-color: rgb(67, 67, 67);"></stop>
+      <stop offset="1" style="stop-color: rgb(130, 130, 130);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="13.97" y1="10.658" x2="13.97" y2="38.126" id="gradient-4" gradientTransform="matrix(1, 0, 0, 1, -14.042226, 24.254922)">
+      <stop offset="0" style="stop-color: rgb(67, 67, 67);"></stop>
+      <stop offset="1" style="stop-color: rgb(130, 130, 130);"></stop>
+    </linearGradient>
+  </defs>
+  <polygon style="stroke: rgb(86, 86, 86); fill: url(#gradient-0);" points="2.042 17.389 13.928 10.658 25.962 17.381 25.802 31.029 14.125 38.126 1.978 31.367"></polygon>
+  <polygon style="stroke: rgb(86, 86, 86); fill: url(#gradient-1);" points="15.987 41.54 27.873 34.809 39.907 41.532 39.747 55.18 28.07 62.277 15.923 55.518"></polygon>
+  <polygon style="stroke: rgb(86, 86, 86); fill: url(#gradient-2);" points="16.014 -6.847 27.9 -13.578 39.934 -6.855 39.774 6.793 28.097 13.89 15.95 7.131"></polygon>
+  <polygon style="stroke: rgb(86, 86, 86); fill: url(#gradient-3);" points="-11.972 -6.902 -0.086 -13.633 11.948 -6.91 11.788 6.738 0.111 13.835 -12.036 7.076"></polygon>
+  <polygon style="stroke: rgb(86, 86, 86); fill: url(#gradient-4);" points="-12 41.644 -0.114 34.913 11.92 41.636 11.76 55.284 0.083 62.381 -12.064 55.622"></polygon>
+</svg>

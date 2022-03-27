@@ -1,0 +1,26 @@
+language="nodejs"
+run="yarn dev"
+
+entrypoint="./TowerDefense/src/main.ts"
+
+[languages.typescript]
+pattern = "**/{*.ts,*.js,*.tsx,*.jsx}"
+syntax = "typescript"
+
+[languages.scss]
+pattern = "**/{*.scss,*.sass}"
+syntax = "scss"
+
+[languages.typescript.languageServer]
+start = [ "typescript-language-server", "--stdio" ]
+
+[packager]
+language = "nodejs"
+
+[packager.features]
+enabledForHosting = false
+packageSearch = true
+guessImports = false
+
+[nix]
+channel = "stable-21_11"

@@ -1,0 +1,548 @@
+// Root Colors
+:root {
+  // Colors
+  ---color-Background: #333;
+}
+// Page Setup
+body,
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: 'Oxanium', 'Monaco', sans-serif;
+}
+button:disabled{
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+// Scenes
+#app {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  & > section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    canvas {
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+}
+// Menu
+#Menu, .TextPage {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+#Menu {
+  background-image: url("./assets/cover.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  animation: view 80s infinite;
+  #navigator {
+    display: flex;
+    flex-direction: column;
+    width: 15rem;
+    background: transparent;
+    padding: 1rem;
+  }
+}
+#Game {
+  background: #000;
+}
+
+/*Main interface container*/
+#interface {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: solid rgba(0, 225, 255, 0.3) 5px;
+}
+// Store
+.Store {
+  height: 100px;
+  width: 80%;
+  max-width: 800px;
+  background: rgb(75,75,75);
+  border: solid rgba(0,175,200,0.6) 2px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translatex(-50%);
+  clip-path: polygon(25px 0%, calc(100% - 25px) 0%, 100% 100%, 0% 100%);
+  overflow-x: auto;
+}
+.up{
+  bottom: 100px !important;
+}
+
+/*Stats*/
+#stats {
+  background: rgba(0, 225, 255, 0.4);
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  color: white;
+  text-align: right;
+  font-family: "Oxanium", "Monaco", monospace;
+  clip-path: polygon(100% 0, 100% 100%, 20px 100%, 0 calc(100% - 20px), 0 0);
+  padding: 10px;
+  padding-left: 20px;
+  font-size: 16px;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+}
+#mdc {
+  text-align: center;
+  margin: 15px 0;
+  font-size: 16px;
+  font-family: "Oxanium", "Monaco", monospace;
+  color: white;
+}
+
+/*Zoom Buttons*/
+#zoom-btns {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+}
+#zoomin,
+#zoomout {
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  color: #fff;
+  border: solid #fff 2px;
+  border-radius: 50%;
+  margin: 5px;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+  background: transparent;
+  transition: 0.25s;
+  cursor: pointer;
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+/*Pause Button*/
+#pause-button {
+  color: white;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 30px;
+  padding: 5px;
+  border-radius: 5px;
+  transition: 0.25s;
+}
+#pause-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+}
+
+/*Repler messages for waves*/
+#message-overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  display: none;
+}
+#msg {
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 70%;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+  border: none;
+  background: rgba(0, 175, 200, 0.5);
+  padding: 10px;
+  min-width: 200px;
+  position: absolute;
+  max-width: 400px;
+  clip-path: polygon(
+    100% 0,
+    100% calc(100% - 30px),
+    calc(100% - 30px) 100%,
+    0 100%,
+    0 0
+  );
+}
+#repler-image {
+  width: 75px;
+  height: 75px;
+  border-radius: 5px;
+}
+#repler-name {
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "Oxanium", "Monaco", monospace;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+#repler-message {
+  color: white;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Oxanium", "Monaco", monospace;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+/*Special and Tower buttons*/
+#centerbtn {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translatex(-50%);
+  display: flex;
+}
+#centerbtn {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translatex(-50%);
+  display: flex;
+}
+#tower-menu-btn,
+#special-attack-btn {
+  border: none;
+  clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+  background: rgba(0, 175, 200, 0.7);
+  padding: 5px 10px;
+  font-size: 15px;
+  min-width: 100px;
+  font-family: "Oxanium", "Monaco", monospace;
+  transition: 0.25s;
+  color: white;
+  text-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+#tower-menu-btn:hover,
+.metalbtn:hover,
+#special-attack-btn:hover {
+  outline: none;
+  cursor: pointer;
+  filter: brightness(90%);
+}
+
+#pause-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  text-align: center;
+  font-family: "Oxanium", "Monaco", "monospace";
+}
+#title {
+  margin: 0;
+  color: #fff;
+  text-align: center;
+  font-size: 80px;
+  font-weight: 800;
+}
+#title-img {
+  max-height: 150px;
+  margin-bottom: 20px;
+  width: 80%;
+  max-width: 700px;
+}
+
+.menu-btn {
+  background-image: linear-gradient(
+    360deg,
+    rgb(180, 180, 180),
+    rgb(120, 120, 120)
+  );
+  color: #fff;
+  padding: 1rem;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 20px 0;
+  border: solid rgb(140, 140, 140) 2px;
+  margin-top: -2px;
+  clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+  font-family: "Oxanium", "Monaco", monospace;
+  font-weight: 300;
+  color: rgb(0, 225, 255);
+  transition: 0.25s;
+  cursor: pointer;
+  &:hover {
+    outline: none;
+    filter: brightness(90%);
+    transform: scale(1.1);
+  }
+}
+
+.TextPage {
+  background-color: #000;
+  background-image: url("./assets/misc/hexpattern.svg");
+  background-size: 10rem;
+  animation: view 80s infinite linear;
+}
+
+.header {
+  font-size: 40px;
+  color: white;
+}
+#HowToPlay {
+  .container {
+    background: rgba(172, 172, 172, 0.2);
+    border: rgba(255, 255, 255, 0.5) 2px solid;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  p {
+    color: white;
+    font-size: 22px;
+  }
+  .info {
+    width: 70vw;
+  }
+  h2 {
+    color: white;
+  }
+  ul {
+    color: white;
+    font-size: 22px;
+  }
+}
+#LeaderBoard {
+  .leaderboard {
+    background: rgba(172, 172, 172, 0.2);
+    border: rgba(255, 255, 255, 0.5) 1px solid;
+    padding: 20px;
+    border-radius: 8px;
+    .row {
+      display: grid;
+      width: 570px;
+      grid-template-columns: repeat(3, 1fr);
+      span {
+        color: white;
+        font-size: 20px;
+      }
+      .username {
+        text-align: center;
+      }
+      .score {
+        text-align: right;
+      }
+    }
+  }
+  
+}
+.Hidden {
+  display: none !important;
+}
+// stuff for interface
+
+.close-menu-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 20px 0;
+  justify-content: center;
+  justify-items: center;
+}
+.opt-title {
+  text-align: center;
+  margin-top: 0;
+  padding: 0;
+  color: #a8e4ff;
+  font-family: "Oxanium", "Monaco", monospace;
+  font-size: 30px;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 1);
+}
+.hexagon {
+  clip-path: polygon(20% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%);
+}
+.metalbtn {
+  border: solid rgba(0, 225, 255, 0.4) 2px;
+  background-image: linear-gradient(
+    360deg,
+    rgb(160, 160, 160),
+    rgb(120, 120, 120)
+  );
+  padding: 5px 10px;
+  transition: 0.25s;
+  color: rgb(0, 225, 255);
+  font-family: "Oxanium", "Monaco", monospace;
+}
+.btn-wrap {
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
+}
+.opt-row {
+  display: inline-block;
+  background: rgb(0, 225, 255, 0.3);
+  border: solid rgb(0, 255, 255, 0.5) 2px;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 20px) 0%,
+    100% 20px,
+    100% 100%,
+    20px 100%,
+    0% calc(100% - 20px)
+  );
+  width: 150px;
+  padding: 15px;
+  transition: 0.25s;
+}
+.opt-row:hover {
+  cursor: pointer;
+  background: rgb(0, 225, 255, 0.5);
+}
+.tflex{
+  display: flex;
+  position: relative;
+  left: 50%;
+  transform: translatex(-50%);
+  width: 80%;
+  justify-items: center;
+  justify-content: center;
+  justify-self: center;
+}
+.opt{
+  background: rgba(0,0,0,0.2);
+  padding: 5px;
+  border-radius: 5px;
+  width: 120px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  margin: 10px;
+  transition: 0.25s;
+  min-width: 100px;
+}
+.opt:hover{
+  background: rgba(0,0,0,0.3);
+  cursor:pointer;
+}
+.opt > img{
+  width: 50px;
+  height: 50px;
+  margin: auto;
+}
+.tname {
+  color: white;
+  font-family: "Oxanium", "Monaco", monospace;
+  text-align: center;
+  width: 100%;
+  font-size: 12px;
+}
+.towerimg {
+  max-height: 80%;
+  max-width: 100%;
+  border-radius: 5px;
+  margin: 5px 0;
+}
+.tprice {
+  color: white;
+  font-family: "Oxanium", "Monaco", monospace;
+  text-align: center;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(30, 30, 30);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 225, 255, 0.5);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 225, 255, 0.75);
+}
+
+@keyframes view {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+}
+@media (max-width: 500px) {
+  .menu-btn {
+    padding: 10px;
+    font-size: 15px;
+  }
+}
+@media (max-width: 620px) {
+  #LeaderBoard {
+    .leaderboard {
+      .row {
+        width: 85vw;
+      }
+    }
+  }
+}
+@media (max-width: 600px) {
+  #HowToPlay {
+    .info {
+      width: 90vw;
+    }
+  }
+  #msg {
+    top: 50%;
+    left: 50%;
+    width: calc(100% - 40px);
+    transform: translate(-50%, -50%);
+    max-width: 400px;
+    border: none;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+  }
+}
+@media (max-width: 400px) {
+  .Store{
+    clip-path: none;
+  }
+  #tower-menu-btn,
+  #special-attack-btn {
+    font-size: 13px;
+    min-width: 0;
+  }
+  #zoom-btns {
+    bottom: 5px;
+    right: 5px;
+  }
+  #zoomin,
+  #zoomout {
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+  }
+  #pause-button {
+    bottom: 5px;
+    left: 5px;
+    font-size: 20px;
+  }
+}

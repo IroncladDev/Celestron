@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/assets/misc/decoration-drive.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Celestron</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app">
+      <!-- Menu -->
+      <section id="Menu">
+        <!--<h1 id="title">Celestron</h1>-->
+        <img src="/src/assets/title.svg" id="title-img"/>
+        <div id="navigator">
+          <button class="menu-btn" id="StartBtn">Start Game</button>
+          <button class="menu-btn" id="HowBtn">How to Play</button>
+          <button class="menu-btn" id="LeaderBoardBtn">Leaderboard</button>
+          
+          <button class="menu-btn" id="CreditsBtn">Credits</button>
+        </div>
+      </section>
+      <!-- Game -->
+      <section id="Game" class="Hidden">
+        <div id="interface">
+          <!--Tower Button-->
+          <div id="centerbtn">
+            <button id="special-attack-btn">Special</button>
+            <button id="tower-menu-btn">Towers</button>
+          </div>
+          <!--Corner Stats Interface-->
+          <div id="stats">
+            <div>
+              Wave <span id="wave-count">0</span><br>
+              $<span class="money-count" id="money"></span>
+            </div>
+            <button class="hexagon metalbtn" style="margin-top: 10px;" id="nextwave">Next Wave</button>
+          </div>
+          <!--Zoom Buttons-->
+          <div id="zoom-btns">
+            <button id="zoomin">+</button>
+            <button id="zoomout">-</button>
+          </div>
+          <!-- Store -->
+          <div class="Store Hidden" id="storeBody">
+            <div class="tflex"></div>
+          </div>
+          
+          <!--Messages-->
+          <div id="message-overlay"></div>
+          <div id="msg" class="Hidden">
+            <div style="margin-right: 10px;">
+              <img id="repler-image"/>
+              <button id="nextmsg" class="metalbtn hexagon" style="display: block;width: 100%;margin-top: 5px;">Next</button>
+            </div>
+            <div id="flex-msg">
+              <div id="repler-name"></div>
+              <div id="repler-message"></div>
+            </div>
+          </div>
+
+          <!--Pause Overlay-->
+          <div id="pause-overlay" class="Hidden">
+            <h1>Game Paused</h1>
+          </div>
+          <!--Pause Button-->
+          <div id="pause-button">||</div>
+        </div>
+      </section>
+      <!-- Credits -->
+      <section id="CreditsScene" class="TextPage Hidden">
+        <button class="menu-btn" id="HomeBtn1">Home</button>
+        <h1 class="header">Credits</h1>
+      </section>
+      <!-- How To Play -->
+      <section id="HowToPlay" class="TextPage Hidden">
+        <button class="menu-btn" id="HomeBtn2">Home</button>
+        <div class="container">
+          <h1 class="header">How to Play</h1>
+          <div class="info">
+            <p><strong>Goal:</strong> Survive as long as possible and beat the leaderboard</p>
+            <p><strong>How:</strong> Place towers and buy special powers to defend replit HQ from malicous repls. Progress through waves as they get harder and harder infinitely. Upgrade towers to better turrets for better protection.</p>
+            <h2>Towers</h2>
+            <ul>
+              <li>
+                Tower 1: <strong>$100</strong>
+                <ul>
+                  <li>100HP</li>
+                  <li>50 - Attack</li>
+                </ul>
+              </li>
+              <li>
+                Tower 2: <strong>$200</strong>
+                <ul>
+                  <li>100HP</li>
+                  <li>50 - Attack</li>
+                </ul>
+              </li>
+              <li>
+                Tower 3: <strong>$300</strong>
+                <ul>
+                  <li>100HP</li>
+                  <li>50 - Attack</li>
+                </ul>
+              </li>
+              <li>
+                Tower 4: <strong>$400</strong>
+                <ul>
+                  <li>100HP</li>
+                  <li>50 - Attack</li>
+                </ul>
+              </li>
+            </ul>
+            <h2>Enemies</h2>
+            <ul>
+              <li>
+                Enemy 1
+                <ul>
+                  <li>100HP</li>
+                  <li>50 - Attack</li>
+                </ul>
+              </li>
+              <li>
+                Enemy 2
+                <ul>
+                  <li>100HP</li>
+                  <li>50 - Attack</li>
+                </ul>
+              </li>
+              <li>
+                Enemy 3
+                <ul>
+                  <li>100HP</li>
+                  <li>50 - Attack</li>
+                </ul>
+              </li>
+              <li>
+                Enemy 4
+                <ul>
+                  <li>100HP</li>
+                  <li>50 - Attack</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- LeaderBoard -->
+      <section class="Hidden TextPage" id="LeaderBoard">
+        <button class="menu-btn" id="HomeBtn3">Home</button>
+        <h1 class="header">LeaderBoard</h1>
+        <div class="leaderboard">
+          <div class="row">
+            <span class="rank">Rank</span>
+            <span class="username">Username</span>
+            <span class="score">Score</span>
+          </div>
+          <div class="row">
+            <span class="rank">1</span>
+            <span class="username">JDOG787</span>
+            <span class="score">1000</span>
+          </div>
+          <div class="row">
+            <span class="rank">2</span>
+            <span class="username">JDOG787</span>
+            <span class="score">1000</span>
+          </div>
+          <div class="row">
+            <span class="rank">3</span>
+            <span class="username">JDOG787</span>
+            <span class="score">1000</span>
+          </div>
+          <div class="row">
+            <span class="rank">4</span>
+            <span class="username">JDOG787</span>
+            <span class="score">1000</span>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

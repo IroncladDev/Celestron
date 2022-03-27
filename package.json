@@ -1,0 +1,26 @@
+{
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "dev": "vite --host 443",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint ./src/main.ts"
+  },
+  "dependencies": {
+    "@swc/core": "^1.2.160",
+    "express": "^4.17.3",
+    "howler": "^2.2.3",
+    "p5": "^1.4.1",
+    "vite": "^2.8.6"
+  },
+  "devDependencies": {
+    "@types/p5": "^1.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "eslint": "^8.11.0",
+    "sass": "^1.49.9",
+    "typescript": "^4.6.2"
+  }
+}
