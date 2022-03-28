@@ -3,7 +3,7 @@
   "license": "MIT",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "dev": "vite --host 443",
+    "dev": "vite --port 443 --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint ./src/main.ts"
@@ -16,6 +16,7 @@
     "vite": "^2.8.6"
   },
   "devDependencies": {
+    "@types/howler": "^2.2.7",
     "@types/p5": "^1.4.1",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",

@@ -7,7 +7,7 @@ import Vector from './Game/Vector';
 import World from './Game/World';
 import AudioEngine from './Game/AudioEngine';
 import { Dialog, Specials, Towers } from './Game/Data';
-import { BackgroundType, EnemyType } from './Game/Types';
+import { BackgroundType, EnemyType, ParticleType } from './Game/Types';
 // Dom References
 const menuScene = <HTMLElement>document.getElementById('Menu');
 const gameScene = <HTMLElement>document.getElementById('Game');
@@ -47,7 +47,41 @@ const enum Texture {
   PathStraight,
   PathTurn,
   Path4Way,
-  PathBase
+  PathBase,
+  // Enemy Textures
+  Enemy_Boss_Gun_1,
+  Enemy_Boss_Gun_2,
+  Enemy_Boss_Main_1,
+  Enemy_Boss_Main_2,
+  Enemy_Gun_14,
+  Enemy_Gun_13,
+  Enemy_Gun_4,
+  Enemy_Gun_6,
+  Enemy_Gun_9,
+  Enemy_Insect_Leg,
+  Enemy_Leg_10,
+  Enemy_Leg_12,
+  Enemy_Main_1,
+  Enemy_Main_2,
+  Enemy_Main_3,
+  Enemy_Main_4,
+  Enemy_Main_5,
+  Enemy_Main_6,
+  Enemy_Main_7,
+  Enemy_Main_8,
+  Enemy_Main_9,
+  Enemy_Main_10,
+  Enemy_Main_11,
+  Enemy_Main_12,
+  Enemy_Main_13,
+  Enemy_Main_14,
+  Enemy_Main_15,
+  Enemy_Main_16,
+  Enemy_Main_17,
+  Enemy_Main_18,
+  Enemy_Wing_7,
+  // General
+  MoonBg
 }
 const enum StoreState {
   Tower,
@@ -70,22 +104,52 @@ const startGame = () => {
     let fr = 0;
     // Preload some stuff
     p5.preload = async function preload() {
+      // Load Image Helper
+      const loadImage = (tex: Texture, path: string) => {
+        textures.set(tex, p5.loadImage(`/src/assets/${path}`));
+      };
       // Load Images
-      textures.set(Texture.Base, p5.loadImage('./src/assets/base.png'));
-      textures.set(Texture.PathBase, p5.loadImage('./src/assets/misc/path-base.png'));
-      textures.set(
-        Texture.PathStraight, 
-        p5.loadImage('./src/assets/misc/path-straight.png')
-      );
-      textures.set(
-        Texture.PathTurn,
-        p5.loadImage('./src/assets/misc/path-corner.png')
-      );
-      textures.set(
-        Texture.Path4Way,
-        p5.loadImage('./src/assets/misc/path-cross.png')
-      );
-      // Load Sound
+      loadImage(Texture.Base, 'base.png');
+      
+      loadImage(Texture.PathBase, 'misc/path-base.png');
+      loadImage(Texture.PathStraight, 'misc/path-straight.png');
+      loadImage(Texture.PathTurn, 'misc/path-corner.png');
+      loadImage(Texture.Path4Way, 'misc/path-cross.png');
+
+      loadImage(Texture.Enemy_Boss_Gun_1, 'enemies/enemy-boss-gun-1.png');
+      loadImage(Texture.Enemy_Boss_Gun_2, 'enemies/enemy-boss-gun-2.png');
+      loadImage(Texture.Enemy_Boss_Main_1, 'enemies/enemy-boss-main-1.png');
+      loadImage(Texture.Enemy_Boss_Main_2, 'enemies/enemy-boss-main-2.png');
+      loadImage(Texture.Enemy_Gun_14, 'enemies/enemy-gun-14.png');
+      loadImage(Texture.Enemy_Gun_13, 'enemies/enemy-gun-13.png');
+      loadImage(Texture.Enemy_Gun_4, 'enemies/enemy-gun-4.png');
+      loadImage(Texture.Enemy_Gun_6, 'enemies/enemy-gun-6.png');
+      loadImage(Texture.Enemy_Gun_9, 'enemies/enemy-gun-9.png');
+      loadImage(Texture.Enemy_Insect_Leg, 'enemies/enemy-insect-leg.png');
+      loadImage(Texture.Enemy_Leg_10, 'enemies/enemy-leg-10.png');
+      loadImage(Texture.Enemy_Leg_12, 'enemies/enemy-leg-12.png');
+
+      loadImage(Texture.Enemy_Main_1, 'enemies/enemy-main-1.png');
+      loadImage(Texture.Enemy_Main_2, 'enemies/enemy-main-2.png');
+      loadImage(Texture.Enemy_Main_3, 'enemies/enemy-main-3.png');
+      loadImage(Texture.Enemy_Main_4, 'enemies/enemy-main-4.png');
+      loadImage(Texture.Enemy_Main_5, 'enemies/enemy-main-5.png');
+      loadImage(Texture.Enemy_Main_6, 'enemies/enemy-main-6.png');
+      loadImage(Texture.Enemy_Main_7, 'enemies/enemy-main-7.png');
+      loadImage(Texture.Enemy_Main_8, 'enemies/enemy-main-8.png');
+      loadImage(Texture.Enemy_Main_9, 'enemies/enemy-main-9.png');
+      loadImage(Texture.Enemy_Main_10, 'enemies/enemy-main-10.png');
+      loadImage(Texture.Enemy_Main_11, 'enemies/enemy-main-11.png');
+      loadImage(Texture.Enemy_Main_12, 'enemies/enemy-main-12.png');
+      loadImage(Texture.Enemy_Main_13, 'enemies/enemy-main-13.png');
+      loadImage(Texture.Enemy_Main_14, 'enemies/enemy-main-14.png');
+      loadImage(Texture.Enemy_Main_15, 'enemies/enemy-main-15.png');
+      loadImage(Texture.Enemy_Main_16, 'enemies/enemy-main-16.png');
+      loadImage(Texture.Enemy_Main_17, 'enemies/enemy-main-17.png');
+      loadImage(Texture.Enemy_Main_18, 'enemies/enemy-main-18.png');
+      loadImage(Texture.Enemy_Wing_7, 'enemies/enemy-wing-7.png');
+      loadImage(Texture.MoonBg, 'background.png');
+
     };
     // Setup Our Scene
     p5.setup = function setup() {
@@ -107,10 +171,12 @@ const startGame = () => {
     };
     // Handle Control Input
     p5.touchStarted = function touchStarted({ touches }: TouchEvent) {
+      if (world.paused) return;
       if(touches)
         touchStart.set(touches[0].pageX - viewPort.x, touches[0].pageY - viewPort.y);
     };
     p5.touchMoved = function mouseDragged(event: MouseEvent | TouchEvent) {
+      if (world.paused) return;
       if (event instanceof MouseEvent) {
         // Mouse Input
         viewPort.x += event.movementX;
@@ -121,6 +187,7 @@ const startGame = () => {
       }
     };
     p5.mouseWheel = function mouseWheel(event: WheelEvent) {
+      if (world.paused) return;
       const diffX = p5.mouseX - viewPort.x;
       const diffY = p5.mouseY - viewPort.y;
       const scaleValue = p5.map(Math.sign(event.deltaY), -1, 1, 1.1, 0.9);
@@ -131,6 +198,7 @@ const startGame = () => {
       viewPort.x -= (dxScaled - diffX);
     };
     (<HTMLElement>document.getElementById('zoomin')).onclick = () => {
+      if (world.paused) return;
       const diffX = p5.width/2 - viewPort.x;
       const diffY = p5.height/2 - viewPort.y;
       const scaleValue = 1.1;
@@ -141,6 +209,7 @@ const startGame = () => {
       viewPort.x -= (dxScaled - diffX);
     };
     (<HTMLElement>document.getElementById('zoomout')).onclick = () => {
+      if (world.paused) return;
       const diffX = p5.width/2 - viewPort.x;
       const diffY = p5.height/2 - viewPort.y;
       const scaleValue = 0.9;
@@ -152,8 +221,9 @@ const startGame = () => {
     };
     // Draw Function
     p5.draw = function draw() {
+      if (world.paused) return;
       // Perform World Update
-      world.Update();
+      world.Update(p5.deltaTime);
       // Drawing
       p5.push();
       // Clear The Screen
@@ -165,9 +235,7 @@ const startGame = () => {
       const worldContents = world.getContents();
       for (const segment of worldContents.WorldSegmentList) {
         // Draw Outter Rectangle
-        p5.strokeWeight(1);
-        p5.fill(125);
-        p5.rect(segment.x, segment.y, segment.width, segment.height);
+        p5.image(textures.get(Texture.MoonBg), segment.x, segment.y, segment.width, segment.height);
         p5.noFill();
         p5.push();
         p5.translate(
@@ -248,17 +316,18 @@ const startGame = () => {
         }
         p5.pop();
         // Draw Spline
-        for (const path of segment.paths) {
+        p5.stroke(0,0,0,75);
+        for (const { points } of segment.paths) {
           p5.strokeWeight(10);
           p5.beginShape();
-          p5.curveVertex(segment.x+path[0].x, segment.y+path[0].y);
-          for (const point of path) {
+          p5.curveVertex(segment.x+points[0].x, segment.y+points[0].y);
+          for (const point of points) {
             p5.curveVertex(segment.x+point.x, segment.y+point.y);
             p5.strokeWeight(20);
             p5.point(segment.x+point.x, segment.y+point.y);
             p5.strokeWeight(10);
           }
-          p5.curveVertex(segment.x+path[path.length-1].x, segment.y+path[path.length-1].y);
+          p5.curveVertex(segment.x+points[points.length-1].x, segment.y+points[points.length-1].y);
           p5.endShape();
         }
         // Draw Castle
@@ -270,18 +339,287 @@ const startGame = () => {
             150,
             150
           );
+          p5.noStroke();
+          p5.fill(255,0,0);
+          p5.rect(50, 10, 100, 10);
+          p5.fill(70, 179, 115);
+          p5.rect(50, 10, 100 * (world.baseHealth / 10), 10);
         }
         // Draw Decorations
       }
+      const pa = Math.PI/180;
       // Draw Enemies
-      for (const enemy of worldContents.enemys) {
+      for (const enemy of worldContents.enemys.values()) {
+        const esize = enemy.scale; // in case enemies have diff sizes
+        // Render Enemies
+        p5.push();
+        p5.translate(enemy.Position.x, enemy.Position.y);
+        p5.scale(Math.round(-enemy.direction.x) < 0 ? -1 : 1,1);
+        p5.scale(0.25 * esize);
+        p5.translate(-200, -400);
         switch (enemy.EnemyType) {
           case EnemyType.Test:
             p5.strokeWeight(10);
             p5.stroke(255, 0, 0);
-            p5.point(enemy.Position.x, enemy.Position.y);
+            p5.point(0,0);
+            break;
+          case EnemyType.Basic:
+            p5.image(textures.get(Texture.Enemy_Main_1),0,0);
+            break;
+          case EnemyType.Fast:
+            p5.image(textures.get(Texture.Enemy_Main_2),0,0);
+            break;
+          case EnemyType.Strong:
+            p5.image(textures.get(Texture.Enemy_Main_3),0, 0);
+            break;
+          case EnemyType.Ultra:
+            p5.image(textures.get(Texture.Enemy_Main_4),0, 0);
+            p5.image(textures.get(Texture.Enemy_Gun_4), 0, 0);
+            break;
+          case EnemyType.Scorpion1: // just trying to fix rigging here
+            p5.push();
+            p5.translate(100, 175);
+            p5.push();
+            p5.translate(0,-p5.sin(p5.frameCount * pa) * 10);
+            p5.scale(-p5.sin(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.push();
+            p5.translate(25,-p5.cos(p5.frameCount * pa) * 10);
+            p5.scale(-p5.cos(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.push();
+            p5.translate(50,-p5.sin(p5.frameCount * pa) * 10);
+            p5.scale(-p5.sin(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.pop();
+            p5.image(textures.get(Texture.Enemy_Main_5), 0, 0);
+            p5.push();
+            p5.translate(100, 175);
+            p5.push();
+            p5.translate(0,p5.sin(p5.frameCount * pa) * 10);
+            p5.scale(p5.sin(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.push();
+            p5.translate(25,p5.cos(p5.frameCount * pa) * 10);
+            p5.scale(p5.cos(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.push();
+            p5.translate(50,p5.sin(p5.frameCount * pa) * 10);
+            p5.scale(p5.sin(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.pop();
+            break;
+          case EnemyType.Scorpion2:
+            p5.push();
+            p5.translate(100, 175);
+            p5.push();
+            p5.translate(0,-p5.sin(p5.frameCount * pa) * 10);
+            p5.scale(-p5.sin(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.push();
+            p5.translate(25,-p5.cos(p5.frameCount * pa) * 10);
+            p5.scale(-p5.cos(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.push();
+            p5.translate(50,-p5.sin(p5.frameCount * pa) * 10);
+            p5.scale(-p5.sin(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.pop();
+            p5.image(textures.get(Texture.Enemy_Main_6), 0, 0);
+            p5.image(textures.get(Texture.Enemy_Gun_6), 0, 0);
+            p5.push();
+            p5.translate(100, 175);
+            p5.push();
+            p5.translate(0,p5.sin(p5.frameCount * pa) * 10);
+            p5.scale(p5.sin(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.push();
+            p5.translate(25,p5.cos(p5.frameCount * pa) * 10);
+            p5.scale(p5.cos(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.push();
+            p5.translate(50,p5.sin(p5.frameCount * pa) * 10);
+            p5.scale(p5.sin(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.pop();
+            break;
+          case EnemyType.Wasp:
+            p5.push();
+            p5.translate(200+20,200-80);
+            p5.rotate(p5.sin(p5.frameCount * 25 * pa) * 15 * pa);
+            p5.image(
+              textures.get(Texture.Enemy_Wing_7),
+              -160,
+              -60 + (p5.sin(p5.frameCount * 2) * 10)
+            );
+            p5.rotate(2*-p5.sin(p5.frameCount * 25 * pa) * 15 * pa);
+            p5.image(
+              textures.get(Texture.Enemy_Wing_7), 
+              -160, -60 + (p5.sin(p5.frameCount * 2) * 10)
+            );
+            p5.pop();
+            p5.image(textures.get(Texture.Enemy_Main_7), 0, p5.sin(p5.frameCount * 2 * pa) * 10);
+            break;
+          case EnemyType.TitanBeetle: 
+            p5.image(textures.get(Texture.Enemy_Main_8), 0, 0);
+            break;
+          case EnemyType.Spider:
+            p5.push();
+            p5.translate(-130 + 200, 90 + 200);
+            p5.push();
+            p5.translate(0,-p5.sin(p5.frameCount * pa) * 10);
+            p5.scale(-p5.sin(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.push();
+            p5.translate(50,-p5.cos(p5.frameCount * pa) * 10);
+            p5.scale(-p5.cos(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.pop();
+            p5.push();
+            p5.translate(0 + 200,100 + 200);
+            p5.push();
+            p5.translate(0,-p5.sin(p5.frameCount * pa) * 10);
+            p5.scale(-p5.sin(p5.frameCount * 2 * pa) * 0.5,0.75);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.push();
+            p5.translate(50,-p5.cos(p5.frameCount * pa) * 10);
+            p5.scale(-p5.cos(p5.frameCount * 2 * pa) * 0.5,0.75);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.pop();
+            p5.image(textures.get(Texture.Enemy_Main_9), 0, 0);
+            p5.image(textures.get(Texture.Enemy_Gun_9), 0, 0);
+            p5.push();
+            p5.translate(-140 + 200, 90 + 200);
+            p5.push();
+            p5.translate(0,p5.sin(p5.frameCount * pa) * 10);
+            p5.scale(p5.sin(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.push();
+            p5.translate(50,p5.cos(p5.frameCount * pa) * 10);
+            p5.scale(p5.cos(p5.frameCount * 2 * pa) * 0.5,1);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.pop();
+            p5.push();
+            p5.translate(0 + 200,100 + 200);
+            p5.push();
+            p5.translate(0,p5.sin(p5.frameCount * pa) * 10);
+            p5.scale(p5.sin(p5.frameCount * 2 * pa) * 0.5,0.75);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.push();
+            p5.translate(50,p5.cos(p5.frameCount * pa) * 10);
+            p5.scale(p5.cos(p5.frameCount * 2 * pa) * 0.5,0.75);
+            p5.image(textures.get(Texture.Enemy_Insect_Leg), -25, 0);
+            p5.pop();
+            p5.pop();
+            break;
+          case EnemyType.ShieldStrong:
+            p5.push();
+            p5.translate(-55  + 200,25 + 200);
+            p5.rotate(p5.cos(p5.frameCount * 3 * pa) * 15 * pa);
+            p5.image(textures.get(Texture.Enemy_Leg_10), -15,-15,100,200);
+            p5.rotate(2 * -(p5.cos(p5.frameCount * 3 * pa) * 15 * pa));
+            p5.image(textures.get(Texture.Enemy_Leg_10), -15,-15,100,200);
+            p5.pop();
+            p5.image(textures.get(Texture.Enemy_Main_10), 0,0);
+            break;
+          case EnemyType.ShieldDefault:
+            p5.push();
+            p5.translate(-55  + 200,25 + 200);
+            p5.rotate(p5.cos(p5.frameCount * 3 * pa) * 15 * pa);
+            p5.image(textures.get(Texture.Enemy_Leg_10), -15,-15,100,200);
+            p5.rotate(2 * -(p5.cos(p5.frameCount * 3 * pa) * 15 * pa));
+            p5.image(textures.get(Texture.Enemy_Leg_10), -15,-15,100,200);
+            p5.pop();
+            p5.image(textures.get(Texture.Enemy_Main_11), 0,0);
+            break;
+          case EnemyType.FireShield:
+            p5.push();
+            p5.translate(-55  + 200,25 + 200);
+            p5.rotate(p5.cos(p5.frameCount * 3 * pa) * 15 * pa);
+            p5.image(textures.get(Texture.Enemy_Leg_12), -15,-15,100,200);
+            p5.rotate(2 * -(p5.cos(p5.frameCount * 3 * pa) * 15 * pa));
+            p5.image(textures.get(Texture.Enemy_Leg_12), -15,-15,100,200);
+            p5.pop();
+            p5.image(Texture.Enemy_Main_12, 0,0);
+            break;
+          case EnemyType.FireShieldGunner:
+            p5.push();
+            p5.translate(-55  + 200,25 + 200);
+            p5.rotate(p5.cos(p5.frameCount * 3 * pa) * 15 * pa);
+            p5.image(textures.get(Texture.Enemy_Leg_12), -15,-15,100,200);
+            p5.rotate(2 * -(p5.cos(p5.frameCount * 3 * pa) * 15 * pa));
+            p5.image(textures.get(Texture.Enemy_Leg_12), -15,-15,100,200);
+            p5.pop();
+            p5.image(textures.get(Texture.Enemy_Main_13), 0,0);
+            p5.image(textures.get(Texture.Enemy_Gun_13), 0, 0);
+            break;
+          case EnemyType.Troll:
+            p5.image(textures.get(Texture.Enemy_Main_14), 0,0);
+            p5.image(textures.get(Texture.Enemy_Gun_14), 0, 0);
+            break;
+          case EnemyType.GhostMantis:
+            p5.image(textures.get(Texture.Enemy_Main_15), 0,0);
+            break;
+          case EnemyType.Virus1:
+            p5.image(textures.get(Texture.Enemy_Main_16), 0,0);
+            break;
+          case EnemyType.Virus2:
+            p5.image(textures.get(Texture.Enemy_Main_17), 0,0);
+            break;
+          case EnemyType.Ship:
+            p5.image(textures.get(Texture.Enemy_Main_18), 0,0,400,0.75 * 400);
+            break;
+          case EnemyType.Boss1:
+            p5.image(textures.get(Texture.Enemy_Boss_Main_1), 0,0);
+            p5.image(textures.get(Texture.Enemy_Boss_Gun_1), 0,0);
+            break;
+          case EnemyType.Boss2:
+            p5.image(textures.get(Texture.Enemy_Boss_Main_2), 0,0);
+            p5.image(textures.get(Texture.Enemy_Boss_Gun_2), 0,0);
             break;
         }
+        p5.noStroke();
+        p5.fill(255,0,0);
+        p5.rect(10, 10, p5.map(enemy.maxHealth, 0, enemy.maxHealth, 0, 400), 10);
+        p5.fill(70, 179, 115);
+        p5.rect(10, 10, p5.map(enemy.health, 0, enemy.maxHealth, 0, 400), 10);
+        p5.pop();
+        
+      }
+      // Particle Drawing
+      for (const particle of worldContents.particles.values()){
+        p5.push();
+        p5.translate(particle.Position.x, particle.Position.y);
+        switch (particle.ParticleType){
+          case ParticleType.Fire:
+            p5.rectMode(p5.CENTER);
+            p5.fill(255, 225, 0, particle.Opacity);
+            p5.rect(0,0,particle.size,particle.size);
+            break;
+          default:
+            console.log('TODO: You do not render this yet');
+            break;
+        }
+        p5.pop();
       }
       // Draw Any Ui
       p5.pop();
@@ -292,22 +630,28 @@ const startGame = () => {
       // Update elements
       moneyCounts.innerText = `${world.money}`;
       waveButton.disabled = world.activeWave || !msgBox.classList.contains('Hidden');
+      if(world.waveEnded && !world.activeWave){
+        console.log("Ended")
+        setMessage();
+        world.unend();
+      }
     };
     // Add Buttons
-    pauseGame.onclick = () => {
-      audio.clickEffect();
+    const toggleGamePause = (forcePause = false) => {
+      if (forcePause) world.paused = true;
       if (!world.paused) {
         pauseGame.innerText = '►';
-        p5.noLoop();
         audio.pauseMusic();
-      }
-      else {
+      } else {
         pauseGame.innerText = '||';
-        p5.loop();
         audio.resumeMusic();
       }
       pauseOverlay.classList.toggle('Hidden', world.paused);
       world.paused = !world.paused;
+    };
+    pauseGame.onclick = () => {
+      audio.clickEffect();
+      toggleGamePause();
     };
     const setMessage = () => {
       if (
@@ -326,16 +670,17 @@ const startGame = () => {
       if (msgBox.classList.contains('Hidden')) {
         world.newWave();
         waveCount.innerText = `${world.waveCount}`;
-        msgBox.classList.remove('Hidden');
+        //msgBox.classList.remove('Hidden');
         activemessageIndex = 0;
-        setMessage(); 
+        //setMessage()
+    
       }
     };
     advanceMessage.onclick = () => {
       activemessageIndex++;
       setMessage();
     };
-    setMessage();
+    //setMessage();
     const toggleStore = (_storeState: StoreState) => {
       // Remove Event Listener
       if (storeState == _storeState) storeState = StoreState.Closed;
@@ -358,12 +703,15 @@ const startGame = () => {
       for (const child of <HTMLElement[]>Array.from(storeShelf.children)) {
         child.onclick = () => {
           const item = <string>child.getAttribute('itemtype');
-          console.log(`Purchase Type: ${item}, isTower? ${storeState}`)
-        }
+          console.log(`Purchase Type: ${item}, isTower? ${storeState}`);
+        };
       }
-    }
+    };
     towerStoreButton.onclick = () => toggleStore(StoreState.Tower);
     specialStoreButton.onclick = () => toggleStore(StoreState.Special);
+    document.addEventListener('visibilitychange', (event) => {
+      if (document.hidden) toggleGamePause();
+    });
   }, gameScene ?? undefined);
 };
 const enum Button {

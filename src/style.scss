@@ -44,12 +44,12 @@ button:disabled{
   width: 100%;
   height: 100%;
   padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   overflow-y: auto;
 }
 #Menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-image: url("./assets/cover.svg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -77,7 +77,7 @@ button:disabled{
 }
 // Store
 .Store {
-  height: 100px;
+  height: 120px;
   width: 80%;
   max-width: 800px;
   background: rgb(75,75,75);
@@ -86,11 +86,12 @@ button:disabled{
   bottom: 0;
   left: 50%;
   transform: translatex(-50%);
-  clip-path: polygon(25px 0%, calc(100% - 25px) 0%, 100% 100%, 0% 100%);
+  //clip-path: polygon(25px 0%, calc(100% - 25px) 0%, 100% 100%, 0% 100%);
   overflow-x: auto;
+  overflow-y: hidden;
 }
 .up{
-  bottom: 100px !important;
+  bottom: 120px !important;
 }
 
 /*Stats*/
@@ -299,59 +300,98 @@ button:disabled{
 .TextPage {
   background-color: #000;
   background-image: url("./assets/misc/hexpattern.svg");
-  background-size: 10rem;
-  animation: view 80s infinite linear;
+  background-size: 4rem;
+  animation: view 120s infinite linear;
+  .page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .header {
   font-size: 40px;
   color: white;
 }
-#HowToPlay {
-  .container {
-    background: rgba(172, 172, 172, 0.2);
-    border: rgba(255, 255, 255, 0.5) 2px solid;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  p {
+.container > .info > p{
     color: white;
     font-size: 22px;
-  }
-  .info {
-    width: 70vw;
-  }
-  h2 {
-    color: white;
-  }
-  ul {
-    color: white;
-    font-size: 22px;
-  }
 }
+.container > .info >  ul {
+    color: white;
+    font-size: 22px;
+  }
+
+// Leaderboard Page
 #LeaderBoard {
-  .leaderboard {
-    background: rgba(172, 172, 172, 0.2);
-    border: rgba(255, 255, 255, 0.5) 1px solid;
-    padding: 20px;
-    border-radius: 8px;
-    .row {
-      display: grid;
-      width: 570px;
-      grid-template-columns: repeat(3, 1fr);
-      span {
-        color: white;
-        font-size: 20px;
+  .page-container {
+    justify-content: center;
+    flex-direction: row;
+    height: 100%;
+    .left {
+      margin-right: 8px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: start;
+      .profile {
+        background: rgba(172, 172, 172, 0.2);
+        border: rgba(255, 255, 255, 0.5) 1px solid;
+        padding: 20px;
+        border-radius: 8px;
+        width: 100%;
+        h2 {
+          margin-bottom: 0;
+        }
+        h3 {
+          margin: 0;
+          font-size: 1rem;
+          color: white;
+          
+        }
+        .stats {
+          span {
+            color: rgb(200, 200, 200);
+          }
+        }
       }
-      .username {
-        text-align: center;
+      .metalbtn {
+        font-size: 1.2rem;
       }
-      .score {
-        text-align: right;
+    }
+    .right {
+      margin-left: 8px;
+      width: 100%;
+      height: 100%;
+      .lb {
+        background: rgba(172, 172, 172, 0.2);
+        border: rgba(255, 255, 255, 0.5) 1px solid;
+        padding: 20px;
+        border-radius: 8px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        
+        .lb-container {
+          overflow-y:auto;
+          height: 100%;
+          .row {
+            margin-bottom: 5px;
+            color: white;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+          }
+        }
       }
     }
   }
-  
+  .right > .lb > h2, .left > .profile > h2 {
+    color: white;
+    font-size: 2.2rem;
+  }
 }
 .Hidden {
   display: none !important;
@@ -418,6 +458,8 @@ button:disabled{
   background: rgb(0, 225, 255, 0.5);
 }
 .tflex{
+  papdding: 0 30px;
+  margin: 0 30px;
   display: flex;
   position: relative;
   left: 50%;
@@ -431,8 +473,10 @@ button:disabled{
   background: rgba(0,0,0,0.2);
   padding: 5px;
   border-radius: 5px;
-  width: 120px;
+  width: 200px;
+  min-width: 120px;
   height: 80px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   font-size: 13px;
@@ -467,10 +511,15 @@ button:disabled{
   font-family: "Oxanium", "Monaco", monospace;
   text-align: center;
 }
+.icon-money{
+  width: 15px;
+  height: 20px;
+  vertical-align: middle;
+}
 
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 10px;
+  height: 10px;
 }
 ::-webkit-scrollbar-track {
   background: rgb(30, 30, 30);
@@ -486,7 +535,7 @@ button:disabled{
   0% {
     background-position: 0 0;
   }
-  50% {
+  100% {
     background-position: 100% 0;
   }
 }
@@ -505,12 +554,15 @@ button:disabled{
     }
   }
 }
+.container{
+  max-width: 700px !important;
+  width: 90vw !important;
+  position: relative;
+  left: 50%;
+  transform: translatex(-50%);
+  color: white;
+}
 @media (max-width: 600px) {
-  #HowToPlay {
-    .info {
-      width: 90vw;
-    }
-  }
   #msg {
     top: 50%;
     left: 50%;
@@ -545,4 +597,157 @@ button:disabled{
     left: 5px;
     font-size: 20px;
   }
+}
+
+// STARS
+
+
+@mixin translate50
+{
+  -webkit-transform: translate(-50, -50%);
+  -ms-transform: translate(-50, -50%);
+  -o-transform: translate(-50, -50%);
+  transform: translate(-50, -50%);
+}
+
+@mixin roundedCorners
+{
+  -webkit-border-radius: 50%; 
+  -moz-border-radius: 50%; 
+  border-radius: 50%;
+}
+
+@mixin rotateBase
+{
+  -webkit-transform: rotate3d(-1, 1, 0, 0deg);
+  -ms-transform: rotate3d(-1, 1, 0, 0deg);
+  -o-transform: rotate3d(-1, 1, 0, 0deg);
+  transform: rotate3d(-1, 1, 0, 0deg);
+}
+
+@mixin rotateRight
+{
+  -webkit-transform: rotate3d(-1, 1, 0, 30deg);
+  -ms-transform: rotate3d(-1, 1, 0, 30deg);
+  -o-transform: rotate3d(-1, 1, 0, 30deg);
+  transform: rotate3d(-1, 1, 0, 30deg);
+}
+
+@mixin rotateLeft
+{
+  -webkit-transform: rotate3d(-1, 1, 0, -30deg);
+  -ms-transform: rotate3d(-1, 1, 0, -30deg);
+  -o-transform: rotate3d(-1, 1, 0, -30deg);
+  transform: rotate3d(-1, 1, 0, -30deg);
+}
+
+// n is number of stars generated
+@function generateStars ($n)
+{ 
+  $value: '#{0} #{random(2000)}px #{random(2000)}px #FFF';
+
+  @for $i from 2 through $n
+  {
+    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF';
+  }
+
+  @return unquote($value);
+}
+
+$stars-small:  generateStars(700);
+$stars-medium: generateStars(200);
+$stars-big:    generateStars(100);
+
+body
+{
+  overflow: hidden;
+}
+
+.TextPage
+{
+  height: 200vh;
+  width: 200%;
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #191F24 100%);
+  overflow-x: hidden;
+  oveflow-y: auto;
+  @include translate50;
+}
+
+    
+#stars
+{
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: $stars-small;
+  animation : animateStars 28.5s ease-in-out infinite;
+  @include roundedCorners;
+
+  &::after
+  {
+    content: " ";
+    position: absolute;
+    margin: auto;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: $stars-small;
+    @include roundedCorners;
+  }
+}
+    
+#stars2
+{
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: $stars-medium;
+  animation : animateStars 30s ease-in-out infinite;
+  @include roundedCorners;
+    
+  &::after
+  {
+    content: " ";
+    position: absolute;
+    margin: auto;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow: $stars-medium;
+    @include roundedCorners;
+  }
+}
+    
+#stars3
+{
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: $stars-big;
+  animation : animateStars 31.5s ease-in-out infinite;
+  @include roundedCorners;
+    
+  &:after
+  {
+    content: " ";
+    position: absolute;
+    margin: auto;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 3px;
+    height: 3px;
+    background: transparent;
+    box-shadow: $stars-big;
+    @include roundedCorners;
+  }
+}
+
+@keyframes animateStars
+{
+  0%{@include rotateBase;}
+  25%{@include rotateRight;}
+  50%{@include rotateBase;}
+  75%{@include rotateLeft;}
+  100%{@include rotateBase;}
 }

@@ -1,3 +1,4 @@
+import { TowerType, Specials } from './Types';
 // Message Data
 interface Message {
   image: string;
@@ -102,7 +103,7 @@ export const Dialog: { [key: number]: Message[] } = {
     {
       image: 'r-cnnd.png', 
       name: 'Cnnd', 
-      message: 'have you checked out https://fart.solutions ?'
+      message: 'https://fart.solutions is the solution to everything, even blog design.'
     },
     {
       image: 'r-soren.png', 
@@ -470,43 +471,82 @@ interface StoreItem {
   name: string;
   image: string;
   cost: number;
+  type?: TowerType | Specials;
 }
 export const Specials: Map<number, StoreItem> = new Map([
   [ 
     0, {
-      name: 'airstrike',
+      name: 'Airstrike',
       image: 'replers/r-h.png',
-      cost: 100
+      cost: 150
     } 
   ],
   [ 
     1, {
-      name: 'piero bomb',
+      name: 'Piero Bomb',
       image: 'replers/r-piero.png',
       cost: 250
     } 
-  ]
+  ],
+  [
+    2, {
+      name: "Laser Rain",
+      image: "replers/r-soren.png",
+      cost: 250
+    }
+  ],
+  [
+    3, {
+      name: "Nix Nuke",
+      image: "replers/r-amasad.png",
+      cost: 1000
+    }
+  ],
+  [
+    4, {
+      name: "DartSpear",
+      image: "replers/r-dart.png",
+      cost: 250
+    }
+  ],
+  [
+    5, {
+      name: "Freezer",
+      image: "replers/r-snow.png",
+      cost: 250
+    }
+  ],
+  [
+    6, {
+      name: "Fart Solution",
+      image: "replers/r-cnnd.png",
+      cost: 250
+    }
+  ],
 ]);
 export const Towers: Map<number, StoreItem> = new Map([
   [ 
     0, {
       name: 'Basic',
       image: 'towers/tower-base-3.png',
-      cost: 50
+      cost: 50,
+      type: TowerType.Basic
     } 
   ],
   [ 
     1, {
       name: 'Machine',
       image: 'towers/mgun-base-3.png',
-      cost: 100
+      cost: 100,
+      type: TowerType.Machine
     } 
   ],
   [ 
     2, {
       name: 'Railgun',
       image: 'towers/railgun-base-3.png',
-      cost: 200
+      cost: 200,
+      type: TowerType.RailGun
     } 
   ]
 ]);

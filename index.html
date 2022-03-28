@@ -35,7 +35,7 @@
           <div id="stats">
             <div>
               Wave <span id="wave-count">0</span><br>
-              $<span class="money-count" id="money"></span>
+              <img src="/src/assets/interface/money.png" class="icon-money"><span class="money-count" id="money"></span>
             </div>
             <button class="hexagon metalbtn" style="margin-top: 10px;" id="nextwave">Next Wave</button>
           </div>
@@ -73,7 +73,14 @@
       <!-- Credits -->
       <section id="CreditsScene" class="TextPage Hidden">
         <button class="menu-btn" id="HomeBtn1">Home</button>
-        <h1 class="header">Credits</h1>
+        <div class="container">
+           <h1 class="header">Credits</h1>
+        <div class="info">
+            <p>**SpotAndJake** - Game Mechanics, world generation, and all the hard stuff</p>
+            <p>**Jdog787** - Sound Effects, Music, Leaderboard, Server-side functions.</p>
+          <p>**IroncladDev** - Story, graphics & art, interface, and a little dabble of bug fixes everywhere</p>
+          <p>&copy; SpotAndJake, JDOG787, and IroncladDev 2022.  All rights Reserved.</p>
+          </div></div>
       </section>
       <!-- How To Play -->
       <section id="HowToPlay" class="TextPage Hidden">
@@ -81,104 +88,78 @@
         <div class="container">
           <h1 class="header">How to Play</h1>
           <div class="info">
-            <p><strong>Goal:</strong> Survive as long as possible and beat the leaderboard</p>
-            <p><strong>How:</strong> Place towers and buy special powers to defend replit HQ from malicous repls. Progress through waves as they get harder and harder infinitely. Upgrade towers to better turrets for better protection.</p>
-            <h2>Towers</h2>
-            <ul>
-              <li>
-                Tower 1: <strong>$100</strong>
-                <ul>
-                  <li>100HP</li>
-                  <li>50 - Attack</li>
-                </ul>
-              </li>
-              <li>
-                Tower 2: <strong>$200</strong>
-                <ul>
-                  <li>100HP</li>
-                  <li>50 - Attack</li>
-                </ul>
-              </li>
-              <li>
-                Tower 3: <strong>$300</strong>
-                <ul>
-                  <li>100HP</li>
-                  <li>50 - Attack</li>
-                </ul>
-              </li>
-              <li>
-                Tower 4: <strong>$400</strong>
-                <ul>
-                  <li>100HP</li>
-                  <li>50 - Attack</li>
-                </ul>
-              </li>
-            </ul>
-            <h2>Enemies</h2>
-            <ul>
-              <li>
-                Enemy 1
-                <ul>
-                  <li>100HP</li>
-                  <li>50 - Attack</li>
-                </ul>
-              </li>
-              <li>
-                Enemy 2
-                <ul>
-                  <li>100HP</li>
-                  <li>50 - Attack</li>
-                </ul>
-              </li>
-              <li>
-                Enemy 3
-                <ul>
-                  <li>100HP</li>
-                  <li>50 - Attack</li>
-                </ul>
-              </li>
-              <li>
-                Enemy 4
-                <ul>
-                  <li>100HP</li>
-                  <li>50 - Attack</li>
-                </ul>
-              </li>
-            </ul>
+            <p>Your goal is to survive as many waves as possible and move your way up the leaderboard by defending replit's headquarters from bugs, malicious users and repls, and more.</p>
+            <p>Place towers by opening up the tower menu at the bottom of the screen and upgrade them to provide better defenses.  Some special one-time attacks can be used as well.</p>
           </div>
         </div>
       </section>
       <!-- LeaderBoard -->
       <section class="Hidden TextPage" id="LeaderBoard">
-        <button class="menu-btn" id="HomeBtn3">Home</button>
-        <h1 class="header">LeaderBoard</h1>
-        <div class="leaderboard">
-          <div class="row">
-            <span class="rank">Rank</span>
-            <span class="username">Username</span>
-            <span class="score">Score</span>
+			  <div id='stars'></div>
+			  <div id='stars2'></div>
+			  <div id='stars3'></div>
+        <div class="page-container">
+          <div class="left">
+            <button class="metalbtn hexagon" id="HomeBtn3">Home</button>
+            <div class="profile">
+              <h2>Profile</h2>
+              <h3>JDOG787</h3>
+              <div class="stats">
+                <span>Best Score: 1005</span>
+              </div>
+            </div>
           </div>
-          <div class="row">
-            <span class="rank">1</span>
-            <span class="username">JDOG787</span>
-            <span class="score">1000</span>
+          <div class="right">
+            <div class="lb">
+              <h2>Leaderboard</h2>
+              <div class="lb-container">
+                <div class="row"><span>1. JDOG787</span><span>1004</span></div>
+                <div class="row"><span>2. JDOG787</span><span>1004</span></div>
+                <div class="row"><span>3. JDOG787</span><span>1004</span></div>
+                <div class="row"><span>4. JDOG787</span><span>1004</span></div>
+                <div class="row"><span>5. JDOG787</span><span>1004</span></div>
+                <div class="row"><span>6. JDOG787</span><span>1004</span></div>
+                <div class="row"><span>7. JDOG787</span><span>1004</span></div>
+                <div class="row"><span>8. JDOG787</span><span>1004</span></div>
+                <div class="row"><span>9. JDOG787</span><span>1004</span></div>
+                <div class="row"><span>10. JDOG787</span><span>1004</span></div>
+                <div class="row"><span>12. JDOG787</span><span>1004</span></div>
+                <div class="row"><span>13. JDOG787</span><span>1004</span></div>
+                <div class="row"><span>14. JDOG787</span><span>1004</span></div>
+              </div>
+            </div>
           </div>
-          <div class="row">
-            <span class="rank">2</span>
-            <span class="username">JDOG787</span>
-            <span class="score">1000</span>
-          </div>
-          <div class="row">
-            <span class="rank">3</span>
-            <span class="username">JDOG787</span>
-            <span class="score">1000</span>
-          </div>
-          <div class="row">
-            <span class="rank">4</span>
-            <span class="username">JDOG787</span>
-            <span class="score">1000</span>
-          </div>
-        </div>
+
+          
+          <!-- <h1 class="header">LeaderBoard</h1>
+          <div class="leaderboard">
+            <div class="row">
+              <span class="rank">Rank</span>
+              <span class="username">Username</span>
+              <span class="score">Score</span>
+            </div>
+            <div class="row">
+              <span class="rank">1</span>
+              <span class="username">JDOG787</span>
+              <span class="score">1000</span>
+            </div>
+            <div class="row">
+              <span class="rank">2</span>
+              <span class="username">JDOG787</span>
+              <span class="score">1000</span>
+            </div>
+            <div class="row">
+              <span class="rank">3</span>
+              <span class="username">JDOG787</span>
+              <span class="score">1000</span>
+            </div>
+            <div class="row">
+              <span class="rank">4</span>
+              <span class="username">JDOG787</span>
+              <span class="score">1000</span>
+            </div>
+          </div>-->
+        </div> 
       </section>
     </div>
     <script type="module" src="/src/main.ts"></script>

@@ -71,18 +71,13 @@ export const generateWorldSegment = (
     castlePosition: segmentType.castlePosition,
     paths: segmentType.paths,
     decorations: segmentType.decorations,
-    freeSide: {
-      top: segmentType.freeSide.top,
-      bottom: segmentType.freeSide.bottom,
-      left: segmentType.freeSide.left,
-      right: segmentType.freeSide.right,
-    }
+    freeSide: new Set(segmentType.freeSide)
   };
   // Set Free Side
-  if (side == Side.Top) cell.freeSide.bottom = false;
-  else if (side == Side.Bottom) cell.freeSide.top = false;
-  else if (side == Side.Left) cell.freeSide.right = false;
-  else if (side == Side.Right) cell.freeSide.left = false;
+  if (side == Side.Top) cell.freeSide.delete(Side.Bottom);
+  else if (side == Side.Bottom) cell.freeSide.delete(Side.Top);
+  else if (side == Side.Left) cell.freeSide.delete(Side.Right);
+  else if (side == Side.Right) cell.freeSide.delete(Side.Left);
   // Return Value
   return cell;
 };
@@ -94,116 +89,138 @@ export const segmentTypeList: WorldSegment[] = [
     backgroundType: BackgroundType.PathBaseMoon,
     castlePosition: new Vector(width/2, height/2),
     paths: [
-      [
-        new Vector(width/2, height),
-        new Vector(width/2, height/2)
-      ]
+      {
+        points: [
+          new Vector(width/2, height),
+          new Vector(width/2, height/2)
+        ],
+        pathSides: new Set([
+          Side.Bottom
+        ])
+      }
     ],
     decorations: [],
-    freeSide: {
-      top: false,
-      bottom: true,
-      left: false,
-      right: false,
-    },
+    freeSide: new Set([
+      Side.Bottom
+    ])
   },
   {
     width: width,
     height: height,
     backgroundType: BackgroundType.PathStraightMoon,
     paths: [
-      [
-        new Vector(width/2, height),
-        new Vector(width/2, 0) 
-      ]
+      {
+        points: [
+          new Vector(width/2, height),
+          new Vector(width/2, 0) 
+        ],
+        pathSides: new Set([
+          Side.Top,
+          Side.Bottom
+        ])
+      }
     ],
     decorations: [],
-    freeSide: {
-      top: true,
-      bottom: true,
-      left: false,
-      right: false,
-    },
+    freeSide: new Set([
+      Side.Top,
+      Side.Bottom
+    ])
   },
   {
     width: width,
     height: height,
     backgroundType: BackgroundType.LeftTurnTopMoon,
     paths: [
-      [
-        new Vector(width/2, 0),
-        new Vector(width/2, height*0.35),
-        new Vector(width*0.35, height/2),
-        new Vector(0, height/2) 
-      ]
+      {
+        points: [
+          new Vector(width/2, 0),
+          new Vector(width/2, height*0.35),
+          new Vector(width*0.35, height/2),
+          new Vector(0, height/2) 
+        ],
+        pathSides: new Set([
+          Side.Top,
+          Side.Left
+        ])
+      }
     ],
     decorations: [],
-    freeSide: {
-      top: true,
-      bottom: false,
-      left: true,
-      right: false,
-    },
+    freeSide: new Set([
+      Side.Top,
+      Side.Left
+    ])
   },
   {
     width: width,
     height: height,
     backgroundType: BackgroundType.RightTurnTopMoon,
     paths: [
-      [
-        new Vector(width/2, 0),
-        new Vector(width/2, height*0.35),
-        new Vector(width*0.65, height/2),
-        new Vector(width, height/2) 
-      ]
+      {
+        points: [
+          new Vector(width/2, 0),
+          new Vector(width/2, height*0.35),
+          new Vector(width*0.65, height/2),
+          new Vector(width, height/2) 
+        ],
+        pathSides: new Set([
+          Side.Top,
+          Side.Right
+        ])
+      }
     ],
     decorations: [],
-    freeSide: {
-      top: true,
-      bottom: false,
-      left: false,
-      right: true,
-    },
+    freeSide: new Set([
+      Side.Top,
+      Side.Right
+    ])
   },
   {
     width: width,
     height: height,
     backgroundType: BackgroundType.LeftTurnBottomMoon,
     paths: [
-      [
-        new Vector(width/2, height),
-        new Vector(width/2, height*0.65),
-        new Vector(width*0.35, height/2),
-        new Vector(0, height/2) 
-      ]
+      {
+        points: [
+          new Vector(width/2, height),
+          new Vector(width/2, height*0.65),
+          new Vector(width*0.35, height/2),
+          new Vector(0, height/2) 
+        ],
+        pathSides: new Set([
+          Side.Bottom,
+          Side.Left
+        ])
+      }
     ],
     decorations: [],
-    freeSide: {
-      top: false,
-      bottom: true,
-      left: true,
-      right: false,
-    },
+    freeSide: new Set([
+      Side.Bottom,
+      Side.Left
+    ])
   },
   {
     width: width,
     height: height,
     backgroundType: BackgroundType.RightTurnBottomMoon,
     paths: [
-      [
-        new Vector(width/2, height),
-        new Vector(width/2, height*0.65),
-        new Vector(width*0.65, height/2),
-        new Vector(width, height/2) 
-      ]
+      {
+        points: [
+          new Vector(width/2, height),
+          new Vector(width/2, height*0.65),
+          new Vector(width*0.65, height/2),
+          new Vector(width, height/2) 
+        ],
+        pathSides: new Set([
+          Side.Bottom,
+          Side.Right
+        ])
+      }
     ],
     decorations: [],
-    freeSide: {
-      top: false,
-      bottom: true,
-      left: false,
-      right: true,
-    },
+    freeSide: new Set([
+      Side.Bottom,
+      Side.Right
+    ])
   },
   // TODO: Figure out how to path find these
   // {

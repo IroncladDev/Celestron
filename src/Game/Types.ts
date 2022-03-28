@@ -1,12 +1,28 @@
 // Import Types
 import Vector from './Vector';
-import { enemys } from './Enemy';
+import Enemy from './Enemy';
+import Tower from './Tower';
+import Particle from './Particle';
 // Sides
 export const enum Side {
   Top,
   Bottom,
   Left,
   Right
+}
+// Target Type
+export const enum TargetType {
+  Closest,
+  Strongest,
+  Farthest
+}
+// Specials
+export const enum Specials {
+  Testm
+}
+// Towers
+export const enum TowerType {
+  Test,
 }
 // Background
 export const enum BackgroundType {
@@ -23,6 +39,25 @@ export const enum BackgroundType {
 export const enum EnemyType {
   Test,
   Basic,
+  Fast,
+  Strong,
+  Ultra,
+  Scorpion1,
+  Scorpion2,
+  Wasp,
+  TitanBeetle,
+  Spider,
+  ShieldStrong,
+  ShieldDefault,
+  FireShield,
+  FireShieldGunner,
+  Troll,
+  GhostMantis,
+  Virus1,
+  Virus2,
+  Ship,
+  Boss1,
+  Boss2
 }
 // Decorations
 export const enum DecorationType {
@@ -33,6 +68,13 @@ export interface DecorationDefinition {
   position: Vector;
 }
 // World Segment Contents
+export interface SegmentPath {
+  points: Vector[];
+  pathSides: Set<Side>;
+  entranceSegment?: WorldSegmentContents;
+  exitSegment?: WorldSegmentContents;
+  segment?: WorldSegment;
+} 
 export interface WorldSegment {
   width: number;
   height: number;
@@ -44,14 +86,9 @@ export interface WorldSegment {
   ) => boolean;
   backgroundType: BackgroundType;
   castlePosition?: Vector;
-  paths: Vector[][];
+  paths: SegmentPath[];
   decorations: DecorationDefinition[];
-  freeSide: {
-    top: boolean;
-    bottom: boolean;
-    left: boolean;
-    right: boolean;
-  };
+  freeSide: Set<Side>;
 }
 export interface WorldSegmentContents {
   x: number;
@@ -61,20 +98,21 @@ export interface WorldSegmentContents {
   backgroundType: BackgroundType;
   decorations: DecorationDefinition[];
   castlePosition?: Vector;
-  paths: Vector[][];
-  freeSide: {
-    top: boolean;
-    bottom: boolean;
-    left: boolean;
-    right: boolean;
-  };
+  paths: SegmentPath[];
+  freeSide: Set<Side>;
 }
 // World Contents
 export interface WorldContents {
   seed: number;
   wave: number;
   WorldSegmentList: WorldSegmentContents[];
-  enemys: Enemy[];
-  // Towers: any[];
-  // Money: number;
+  enemys: Map<number, Enemy>;
+  particles: Map<number, Particle>;
+  towers: Map<number, Tower>;
+}
+
+export const enum ParticleType{
+  Fire,
+  Smoke,
+  Spark
 }
