@@ -4,14 +4,19 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "dev": "vite --port 443 --host 0.0.0.0",
-    "build": "vite build",
-    "preview": "vite preview",
-    "lint": "eslint ./src/main.ts"
+    "build": "vite build && bash build.sh",
+    "preview": "yarn build && yarn host",
+    "lint": "eslint ./src/main.ts",
+    "host": "node server.js"
   },
   "dependencies": {
+    "@replit/database": "^2.0.1",
     "@swc/core": "^1.2.160",
+    "co-body": "^6.1.0",
+    "cookie-parser": "^1.4.6",
     "express": "^4.17.3",
     "howler": "^2.2.3",
+    "node-fetch": "^3.2.3",
     "p5": "^1.4.1",
     "vite": "^2.8.6"
   },

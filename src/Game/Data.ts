@@ -467,13 +467,14 @@ export const Dialog: { [key: number]: Message[] } = {
   ]
 }
 // Store Data
-interface StoreItem {
+export interface StoreItem {
   name: string;
   image: string;
   cost: number;
   type?: TowerType | Specials;
+  level?: number;
 }
-export const Specials: Map<number, StoreItem> = new Map([
+export const SpecialsShelf: Map<number, StoreItem> = new Map([
   [ 
     0, {
       name: 'Airstrike',
@@ -524,29 +525,113 @@ export const Specials: Map<number, StoreItem> = new Map([
     }
   ],
 ]);
-export const Towers: Map<number, StoreItem> = new Map([
+export const TowersShelf: Map<number, StoreItem> = new Map([
   [ 
     0, {
-      name: 'Basic',
-      image: 'towers/tower-base-3.png',
-      cost: 50,
-      type: TowerType.Basic
+      name: 'Basic - 0',
+      image: 'towers/tower-base-0.png',
+      cost: 75,
+      type: TowerType.Basic,
+      level: 0
     } 
   ],
   [ 
     1, {
-      name: 'Machine',
-      image: 'towers/mgun-base-3.png',
+      name: 'Machine - 0',
+      image: 'towers/mgun-base-0.png',
       cost: 100,
-      type: TowerType.Machine
+      type: TowerType.Machine,
+      level: 0
     } 
   ],
   [ 
     2, {
-      name: 'Railgun',
-      image: 'towers/railgun-base-3.png',
+      name: 'Railgun - 0',
+      image: 'towers/railgun-base-0.png',
       cost: 200,
-      type: TowerType.RailGun
+      type: TowerType.RailGun,
+      level: 0
+    } 
+  ],
+  [ 
+    3, {
+      name: 'Basic - 1',
+      image: 'towers/tower-base-1.png',
+      cost: 250,
+      type: TowerType.Basic,
+      level: 1
+    } 
+  ],
+  [ 
+    4, {
+      name: 'Machine - 1',
+      image: 'towers/mgun-base-1.png',
+      cost: 300,
+      type: TowerType.Machine,
+      level: 1
+    } 
+  ],
+  [ 
+    5, {
+      name: 'Railgun - 1',
+      image: 'towers/railgun-base-1.png',
+      cost: 400,
+      type: TowerType.RailGun,
+      level: 1
+    } 
+  ],
+  [ 
+    6, {
+      name: 'Basic - 2',
+      image: 'towers/tower-base-2.png',
+      cost: 450,
+      type: TowerType.Basic,
+      level: 2
+    } 
+  ],
+  [ 
+    7, {
+      name: 'Machine - 2',
+      image: 'towers/mgun-base-2.png',
+      cost: 500,
+      type: TowerType.Machine,
+      level: 2
+    } 
+  ],
+  [ 
+    8, {
+      name: 'Railgun - 2',
+      image: 'towers/railgun-base-2.png',
+      cost: 600,
+      type: TowerType.RailGun,
+      level: 2
+    } 
+  ],
+  [ 
+    9, {
+      name: 'Basic - 3',
+      image: 'towers/tower-base-3.png',
+      cost: 650,
+      type: TowerType.Basic,
+      level: 3
+    } 
+  ],
+  [ 
+    10, {
+      name: 'Machine - 3',
+      image: 'towers/mgun-base-3.png',
+      cost: 700,
+      type: TowerType.Machine,
+      level: 3
+    } 
+  ],
+  [ 
+    11, {
+      name: 'Railgun - 3',
+      image: 'towers/railgun-base-3.png',
+      cost: 800,
+      type: TowerType.RailGun,
+      level: 3
     } 
   ]
 ]);

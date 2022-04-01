@@ -213,12 +213,16 @@ export default class Vector {
 		const dx = this.x - vec.x, dy = this.y - vec.y, dz = this.z - vec.z;
 		return dx * dx + dy * dy + dz * dz;
 	}
+  public distanceTo(vec: Vector): number {
+		const dx = this.x - vec.x, dy = this.y - vec.y, dz = this.z - vec.z;
+		return Math.sqrt(dx * dx + dy * dy + dz * dz);
+	}
   public angleTo(vec: Vector): number {
 		const denominator = Math.sqrt(this.lengthSq() * vec.lengthSq() );
-		if ( denominator === 0 ) return Math.PI / 2;
+		if (denominator === 0) return Math.PI / 2;
 		const theta = this.dot(vec) / denominator;
 		// clamp, to handle numerical problems
-    return Math.acos(clamp(theta, -1, 2));
+    return Math.acos(clamp(theta, -1, 1));
 	}
   public dot(vec: Vector): number {
 		return this.x * vec.x + this.y * vec.y + this.z * vec.z;

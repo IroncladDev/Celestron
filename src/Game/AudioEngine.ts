@@ -2,8 +2,9 @@ import {Howl, Howler} from 'howler';
 
 export default class AudioEngine {
   private musicTracks: string[] = [
-    'song1', 'song2', 'song3', 'song4', 'song5', 'song6', 'song7', 'song8'
+    'song1', 'song2', 'song3', 'song4', 'song5', 'song6', 'song7', 'song8', 'song9'
   ];
+  private effectInstances: number = 0;
   private prevSong: {name: string, id: number, song?: Howl} | null = null;
   private pickSong(): string {
     return this.musicTracks[Math.floor(Math.random()*this.musicTracks.length)];
@@ -29,11 +30,16 @@ export default class AudioEngine {
       volume: vol
     });
   }
-  private effect(effectName: string, vol: number) {
-    return new Howl({
-      src: [`src/assets/sound/effects/${effectName}.wav`],
+  public effect(effectName: string, vol: number) {
+    if (this.effectInstances > 3) return; 
+    this.effectInstances++;
+    const effect = new Howl({
+      src: [`src/assets/sound/effects/${effectName}`],
       volume: vol
     });
+    effect.play();
+    effect.on('end', () => this.effectInstances--);
+    return effect;
   }
   public startMenuMusic() {
     const id = this.song('menu', 0.1).play();
@@ -44,7 +50,7 @@ export default class AudioEngine {
   }
   public startGameMusic() {
     this.loadSong();
-    // When Song End Play Next Song
+    // When Song Ends Play Next Song
     if (this.prevSong && this.prevSong.song != null) {
       this.prevSong.song.on('end', () => {
         this.loadSong();
@@ -61,6 +67,6 @@ export default class AudioEngine {
       this.prevSong.song.play();
   }
   public clickEffect() {
-    this.effect('click', 1).play();
+    this.effect('click.wav', 1);
   }
 }

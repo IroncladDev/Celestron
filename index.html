@@ -5,6 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/src/assets/misc/decoration-drive.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Celestron</title>
+    <meta name="description" content="Celestron is a replit-based tower defense"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,7 +15,7 @@
       <!-- Menu -->
       <section id="Menu">
         <!--<h1 id="title">Celestron</h1>-->
-        <img src="/src/assets/title.svg" id="title-img"/>
+        <img src="/src/assets/title.svg" id="title-img" alt="Celestron Title"/>
         <div id="navigator">
           <button class="menu-btn" id="StartBtn">Start Game</button>
           <button class="menu-btn" id="HowBtn">How to Play</button>
@@ -22,20 +23,33 @@
           
           <button class="menu-btn" id="CreditsBtn">Credits</button>
         </div>
+
+        <button id="login-button" class="metalbtn hexagon">Log In</button>
+        <div id="loggedin-indicator" class="Hidden">
+          <img alt="profile indicator" src="/src/assets/interface/user.svg"/>
+          <span id="username-indicator">Username</span>
+        </div>
+        <div id="login-overlay"></div>
+        <div id="login-modal">
+          <h2>Log In</h2>
+          <p>If you would like to be on the leaderboard, please log in with replit.</p>
+          <button id="login-replit-btn" class="metalbtn hexagon">Authorize Celestron</button>
+          <button id="close-login-btn" class="metalbtn hexagon">Continue Anonymous</button>
+        </div>
       </section>
       <!-- Game -->
       <section id="Game" class="Hidden">
         <div id="interface">
           <!--Tower Button-->
           <div id="centerbtn">
-            <button id="special-attack-btn">Special</button>
+<!--             <button id="special-attack-btn">Special</button> -->
             <button id="tower-menu-btn">Towers</button>
           </div>
           <!--Corner Stats Interface-->
           <div id="stats">
             <div>
               Wave <span id="wave-count">0</span><br>
-              <img src="/src/assets/interface/money.png" class="icon-money"><span class="money-count" id="money"></span>
+              <img alt="Currency Icon" src="/src/assets/interface/money.png" class="icon-money"><span class="money-count" id="money"></span>
             </div>
             <button class="hexagon metalbtn" style="margin-top: 10px;" id="nextwave">Next Wave</button>
           </div>
@@ -43,6 +57,7 @@
           <div id="zoom-btns">
             <button id="zoomin">+</button>
             <button id="zoomout">-</button>
+            <button id="speed">x1</button>
           </div>
           <!-- Store -->
           <div class="Store Hidden" id="storeBody">
@@ -51,14 +66,23 @@
           
           <!--Messages-->
           <div id="message-overlay"></div>
-          <div id="msg" class="Hidden">
+          <div id="msg" class="Hidden message">
             <div style="margin-right: 10px;">
-              <img id="repler-image"/>
+              <img alt="Repler Image" id="repler-image"/>
               <button id="nextmsg" class="metalbtn hexagon" style="display: block;width: 100%;margin-top: 5px;">Next</button>
             </div>
             <div id="flex-msg">
               <div id="repler-name"></div>
               <div id="repler-message"></div>
+            </div>
+          </div>
+          <!-- Game Over -->
+<!--           <div id="message-overlay"></div> -->
+          <div id="gameover" class="message Hidden">
+            <h1>GAME OVER!</h1>
+            <p>Good job! Check your rank on the leaderboard!</p>
+            <div class="btns">
+              <button class="metalbtn hexagon" id="HomeBtn4">Menu</button>
             </div>
           </div>
 
@@ -72,24 +96,45 @@
       </section>
       <!-- Credits -->
       <section id="CreditsScene" class="TextPage Hidden">
-        <button class="menu-btn" id="HomeBtn1">Home</button>
-        <div class="container">
-           <h1 class="header">Credits</h1>
-        <div class="info">
-            <p>**SpotAndJake** - Game Mechanics, world generation, and all the hard stuff</p>
-            <p>**Jdog787** - Sound Effects, Music, Leaderboard, Server-side functions.</p>
-          <p>**IroncladDev** - Story, graphics & art, interface, and a little dabble of bug fixes everywhere</p>
-          <p>&copy; SpotAndJake, JDOG787, and IroncladDev 2022.  All rights Reserved.</p>
-          </div></div>
+        <div id='stars'></div>
+			  <div id='stars2'></div>
+			  <div id='stars3'></div>
+        <button class="metalbtn hexagon" id="HomeBtn1">Home</button>
+        <div class="page-container">
+          <div class="container">
+            <h1 class="header">Credits</h1>
+            <div class="info">
+              <p><strong>SpotAndJake</strong> - Game Mechanics, world generation, and all the hard stuff.</p>
+              <p><strong>Jdog787</strong> - UI, Sound Effects, Music, Leaderboard, Server-side functions, and other random things.</p>
+              <p><strong>IroncladDev</strong> - Story, graphics & art, interface, and a little dabble of bug fixes everywhere.</p>
+              <p>Sound effects retrieved from <a href="https://storyblocks.com" target="_blank">https://storyblocks.com</a>, some altered and edited with <a href="https://mp3cut.net/" target="_blank">https://mp3cut.net/</a></p>
+              <p>Animated star background retrieved fromm <a href="https://codepen.io/sarazond/pen/LYGbwj">https://codepen.io/sarazond/pen/LYGbwj</a></p>
+              <p>&copy; SpotAndJake, JDOG787, and IroncladDev 2022.  All rights Reserved.</p>
+            </div>
+          </div>
+        </div>
       </section>
       <!-- How To Play -->
       <section id="HowToPlay" class="TextPage Hidden">
-        <button class="menu-btn" id="HomeBtn2">Home</button>
-        <div class="container">
-          <h1 class="header">How to Play</h1>
-          <div class="info">
-            <p>Your goal is to survive as many waves as possible and move your way up the leaderboard by defending replit's headquarters from bugs, malicious users and repls, and more.</p>
-            <p>Place towers by opening up the tower menu at the bottom of the screen and upgrade them to provide better defenses.  Some special one-time attacks can be used as well.</p>
+        <div id='stars'></div>
+			  <div id='stars2'></div>
+			  <div id='stars3'></div>
+        <button class="metalbtn hexagon" id="HomeBtn2">Home</button>
+        <div class="page-container">
+          <div class="container">
+            <h1 class="header">How to Play</h1>
+            <div class="info">
+              <p>Your goal is to survive as many waves as possible and move your way up the leaderboard by defending replit's headquarters from bugs, malicious users and repls, and more.</p>
+              <p>Place towers by opening up the tower menu at the bottom of the screen.  Towers will upgrade automatically after getting a certain number of kills.</p>
+              <p>Typically, you can use the mouse, but there are some shortcut keys:</p>
+              <p>
+                <ul>
+                  <li>Arrow Keys : move map</li>
+                  <li>Spacebar : dismiss messages/start wave</li>
+                  <li>+/- : zoom</li>
+                </ul>
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -103,9 +148,9 @@
             <button class="metalbtn hexagon" id="HomeBtn3">Home</button>
             <div class="profile">
               <h2>Profile</h2>
-              <h3>JDOG787</h3>
+              <h3 id="profile-name">Username</h3>
               <div class="stats">
-                <span>Best Score: 1005</span>
+                <span>Highest Wave: <span id="profile-high">0</span></span>
               </div>
             </div>
           </div>
@@ -113,7 +158,7 @@
             <div class="lb">
               <h2>Leaderboard</h2>
               <div class="lb-container">
-                <div class="row"><span>1. JDOG787</span><span>1004</span></div>
+<!--                 <div class="row"><span>1. JDOG787</span><span>1004</span></div>
                 <div class="row"><span>2. JDOG787</span><span>1004</span></div>
                 <div class="row"><span>3. JDOG787</span><span>1004</span></div>
                 <div class="row"><span>4. JDOG787</span><span>1004</span></div>
@@ -125,40 +170,10 @@
                 <div class="row"><span>10. JDOG787</span><span>1004</span></div>
                 <div class="row"><span>12. JDOG787</span><span>1004</span></div>
                 <div class="row"><span>13. JDOG787</span><span>1004</span></div>
-                <div class="row"><span>14. JDOG787</span><span>1004</span></div>
+                <div class="row"><span>14. JDOG787</span><span>1004</span></div> -->
               </div>
             </div>
           </div>
-
-          
-          <!-- <h1 class="header">LeaderBoard</h1>
-          <div class="leaderboard">
-            <div class="row">
-              <span class="rank">Rank</span>
-              <span class="username">Username</span>
-              <span class="score">Score</span>
-            </div>
-            <div class="row">
-              <span class="rank">1</span>
-              <span class="username">JDOG787</span>
-              <span class="score">1000</span>
-            </div>
-            <div class="row">
-              <span class="rank">2</span>
-              <span class="username">JDOG787</span>
-              <span class="score">1000</span>
-            </div>
-            <div class="row">
-              <span class="rank">3</span>
-              <span class="username">JDOG787</span>
-              <span class="score">1000</span>
-            </div>
-            <div class="row">
-              <span class="rank">4</span>
-              <span class="username">JDOG787</span>
-              <span class="score">1000</span>
-            </div>
-          </div>-->
         </div> 
       </section>
     </div>

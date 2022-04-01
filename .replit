@@ -1,5 +1,5 @@
 language="nodejs"
-run="yarn dev"
+run="yarn host"
 
 entrypoint="./TowerDefense/src/main.ts"
 

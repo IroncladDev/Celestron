@@ -15,6 +15,10 @@ button:disabled{
   opacity: 0.5;
   cursor: not-allowed !important;
 }
+a {
+  color: rgb(0,225,255);
+  text-decoration: none;
+}
 * {
   box-sizing: border-box;
   user-select: none;
@@ -53,7 +57,7 @@ button:disabled{
   background-image: url("./assets/cover.svg");
   background-repeat: no-repeat;
   background-size: cover;
-  animation: view 80s infinite;
+  animation: view 30s infinite;
   #navigator {
     display: flex;
     flex-direction: column;
@@ -100,7 +104,7 @@ button:disabled{
   position: absolute;
   right: 0px;
   top: 0px;
-  color: white;
+  color: #fff;
   text-align: right;
   font-family: "Oxanium", "Monaco", monospace;
   clip-path: polygon(100% 0, 100% 100%, 20px 100%, 0 calc(100% - 20px), 0 0);
@@ -114,7 +118,7 @@ button:disabled{
   margin: 15px 0;
   font-size: 16px;
   font-family: "Oxanium", "Monaco", monospace;
-  color: white;
+  color: #fff;
 }
 
 /*Zoom Buttons*/
@@ -125,13 +129,15 @@ button:disabled{
   display: flex;
 }
 #zoomin,
-#zoomout {
+#zoomout,
+#speed {
   text-align: center;
   vertical-align: middle;
-  position: relative;
-  width: 30px;
-  height: 30px;
-  font-size: 20px;
+  padding: 7.5px;
+  width: 3rem;
+  min-width: max-content;
+  aspect-ratio: 1 / 1;
+  font-size: 15px;
   color: #fff;
   border: solid #fff 2px;
   border-radius: 50%;
@@ -146,7 +152,7 @@ button:disabled{
 }
 /*Pause Button*/
 #pause-button {
-  color: white;
+  color: #fff;
   position: absolute;
   bottom: 20px;
   left: 20px;
@@ -159,6 +165,37 @@ button:disabled{
   background: rgba(255, 255, 255, 0.25);
   cursor: pointer;
 }
+/*GameOver*/
+#gameover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 500px;
+  padding: 1rem;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  color: white;
+  flex-direction: column;
+  h1 {
+    font-size: 2.3rem;
+    margin: 0;
+    color: rgb(200, 200, 200);
+  }
+  p {
+    margin: 0;
+    color: rgb(200, 200, 200);
+    
+  }
+  .btns {
+    text-align: right;
+    margin-top: 25px;
+    button {
+      font-size: 20px;
+      margin-right: 20px;
+    }
+  }
+}
+
 
 /*Repler messages for waves*/
 #message-overlay{
@@ -170,7 +207,7 @@ button:disabled{
   background: rgba(0,0,0,0.3);
   display: none;
 }
-#msg {
+.message {
   display: flex;
   top: 0;
   left: 0;
@@ -208,6 +245,23 @@ button:disabled{
   font-size: 14px;
   font-family: "Oxanium", "Monaco", monospace;
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+#loggedin-indicator{
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  color: white;
+  font-size: 18px;
+  & > img{
+    width: 25px;
+    vertical-align: middle;
+    height: 25px;
+    margin-right: 10px;
+  }
+  & > span{
+    vertical-align: middle;
+  }
 }
 
 /*Special and Tower buttons*/
@@ -270,6 +324,47 @@ button:disabled{
   width: 80%;
   max-width: 700px;
 }
+#login-button{
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  color: white;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+}
+#login-modal{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(180deg, #252d40, #1e2536);
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,0.2);
+  padding: 25px;
+  border-radius: 15px;
+  color: white;
+  text-align: center;
+  & > h2{
+    margin: 0;
+    padding: 0;
+  }
+  & > p{
+    padding: 30px 0;
+  }
+  & > .metalbtn{
+    margin: 10px;
+  }
+}
+#login-overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+#login-replit-btn{
+  
+}
 
 .menu-btn {
   background-image: linear-gradient(
@@ -309,21 +404,37 @@ button:disabled{
   }
 }
 
-.header {
-  font-size: 40px;
-  color: white;
-}
-.container > .info > p{
-    color: white;
-    font-size: 22px;
-}
-.container > .info >  ul {
-    color: white;
-    font-size: 22px;
+#HowToPlay, #CreditsScene {
+  .metalbtn {
+    font-size: 1.2rem;
   }
+  .page-container {
+    .container {
+        background: rgba(172, 172, 172, 0.2);
+        border: rgba(255, 255, 255, 0.5) 1px solid;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 700px;
+        margin-top: 20px;
+    }
+    .header {
+      font-size: 40px;
+      color: white;
+    }
+    .container > .info > p{
+      color: white;
+      font-size: 22px;
+    }
+    .container > .info >  ul {
+      color: white;
+      font-size: 22px;
+    }
+  }
+}
 
 // Leaderboard Page
 #LeaderBoard {
+  overflow: hidden;
   .page-container {
     justify-content: center;
     flex-direction: row;
@@ -461,13 +572,6 @@ button:disabled{
   papdding: 0 30px;
   margin: 0 30px;
   display: flex;
-  position: relative;
-  left: 50%;
-  transform: translatex(-50%);
-  width: 80%;
-  justify-items: center;
-  justify-content: center;
-  justify-self: center;
 }
 .opt{
   background: rgba(0,0,0,0.2);
@@ -485,7 +589,7 @@ button:disabled{
   min-width: 100px;
 }
 .opt:hover{
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.5);
   cursor:pointer;
 }
 .opt > img{
@@ -516,6 +620,9 @@ button:disabled{
   height: 20px;
   vertical-align: middle;
 }
+.Invalid {
+  background: #ff000055;
+}
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -533,10 +640,10 @@ button:disabled{
 
 @keyframes view {
   0% {
-    background-position: 0 0;
+    background-position: 0 100%;
   }
   100% {
-    background-position: 100% 0;
+    background-position: 100% 100%;
   }
 }
 @media (max-width: 500px) {
@@ -554,14 +661,7 @@ button:disabled{
     }
   }
 }
-.container{
-  max-width: 700px !important;
-  width: 90vw !important;
-  position: relative;
-  left: 50%;
-  transform: translatex(-50%);
-  color: white;
-}
+
 @media (max-width: 600px) {
   #msg {
     top: 50%;
@@ -587,10 +687,10 @@ button:disabled{
     right: 5px;
   }
   #zoomin,
-  #zoomout {
-    width: 25px;
-    height: 25px;
-    font-size: 15px;
+  #zoomout,
+  #speed {
+    width: 2rem;
+    font-size: 12px;
   }
   #pause-button {
     bottom: 5px;
@@ -600,7 +700,6 @@ button:disabled{
 }
 
 // STARS
-
 
 @mixin translate50
 {
@@ -669,7 +768,7 @@ body
   width: 200%;
   background: radial-gradient(ellipse at bottom, #1B2735 0%, #191F24 100%);
   overflow-x: hidden;
-  oveflow-y: auto;
+  overflow-y: auto;
   @include translate50;
 }
 

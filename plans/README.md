@@ -5,48 +5,56 @@
   + [x] P5
   + [x] Eslint
 + [x] Everyone - Come Up With Name
-+ [ ] Conner & JDOG - Repl Auth -- **not necessary atm**
 + [x] Conner & JDOG - Set Up Menu View
 + [x] Conner & JDOG - Front End View
 + [x] Conner - Upload All Assets To The Repl
-+ [ ] JDOG & Conner - Begin Setting Up Server, For LeaderBoard
 + [x] JDOG - Try to figure out a background for the game
 + [x] JDOG - Add music
 + [x] JDOG - Add 
 + [x] Conner - Design in Game Ui
 + [x] Spot - WorldGen
-  + This is blocking anything below i
 + [x] Conner - Work On Pan & Zoom Mechanic
 + [x] Conner - Integrate In Game Ui
-+ [ ] Spot - Create Enemy Class
-+ [ ] Spot - Create Tower Class
-+ [ ] Spot - Create Particle Class
-+ [ ] Spot - Create Bullet Class
-+ [ ] Jdog - Add Sound Effects To Classes
 + [x] Conner - Enemy Rigging
-+ [ ] Conner - Tower rigging, Particle Systems, Upload sound effects as needed
-+ + [ ] Conner - Particle System Design
-+ [ ] Spot - Wave Mechanic
 + [x] JDOG - Integrate LeaderBoard FrontEnd
++ [x] Conner - Client side repl auth login funcs
++ [x] Spot - Create Enemy Class
++ [x] Spot - Create Tower Class
++ [x] Spot - Create Particle Class
++ [x] Conner - Tower rigging
++ [x] Conner - Upload sound effects as needed
++ [x] Spot - Wave Mechanic
++ [ ] JDOG - Server side repl auth & leaderboard linking
++ [ ] Jdog - Add Sound Effects To Towers
++ [ ] Conner - Particle Systems
++ [ ] Conner - Particle System Design
 + [ ] Everyone - Polish the game
 
+# Must
++ [x] Get Towers Dealing Damage
++ [x] Spawn Tower Particle's Bullets
++ [x] Verify Tower Spawning
+  + [x] Must be on the map
++ [x] Tower Upgrades
++ [x] Tower Sounds
++ [x] Sell Tower Dialog
+  + Stats
+  + Possible Upgrades
++ [x] Work On Money Income
++ [x] Server
++ [x] Buffer Enemies
++ [x] make enemy die lol
++ [x] Speed Up Buttons
+# Bonus
++ [ ] Implement an easter egg
++ [ ] Implement Special Attacks
++ [x] Add More WorldGen Segments To Fix The Thing
 
 
 
 ## Video Presentation - ONE MINUTE OR LESS
-+ [ ] Conner - speaker
-
-**Script**
-- [Clips of moderation, programming]
-- "Moderation, maintenence, and programming are some everyday challenges the replit team faces.  Do you have what it takes to do the same?"
-- [Silent intense clip of gameplay]
-- "Celestron is an intense, action-packed, and hillarious illustration of what it's like being on the team.  Battle against bugs, undergo the task of moderation, and expect the unexpected."
-- [Clip of map generation]
-- "Enjoy endless gameplay, unlimited fun, and more.  We've taken tower defense games to the next level."
-- [Clip of machinegun tower rapidly firing at enemy]
-- "Can you stand against the forces at play and save replit from descruction?"
-- [screen goes black]
-- "Rated PG-null.  TypeError: Cannot read properly age of undefined."
+**script**
+1. 
 
 
 + [x] Conner - Draw a cover for the game
@@ -56,7 +64,5 @@
 + [ ] Jake - Submit to replit form
 
 
-TODO:
-- Enemy stats and class extensions
-- Repler Attack stats and functions
-- Loading screen for when the game starts
+Conner's folder of pain
+- Play sound when next wave ready

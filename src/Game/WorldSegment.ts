@@ -1,5 +1,5 @@
 // Type Imports
-import { WorldSegmentContents, WorldSegment, BackgroundType, Side } from './Types';
+import { WorldSegmentContents, WorldSegment, BackgroundType, Side, DecorationType } from './Types';
 import Vector from './Vector';
 // General Properties
 const width = 200;
@@ -69,8 +69,13 @@ export const generateWorldSegment = (
     height: segmentType.height,
     backgroundType: segmentType.backgroundType,
     castlePosition: segmentType.castlePosition,
-    paths: segmentType.paths,
-    decorations: segmentType.decorations,
+    paths: segmentType.paths.map(path => {
+      return {
+        ...path,
+        pathSides: new Set(path.pathSides)
+      };
+    }),
+    decorations: segmentType.decorations.filter(() => Math.random() > 0.5),
     freeSide: new Set(segmentType.freeSide)
   };
   // Set Free Side
@@ -92,14 +97,19 @@ export const segmentTypeList: WorldSegment[] = [
       {
         points: [
           new Vector(width/2, height),
-          new Vector(width/2, height/2)
+          new Vector(width/2, height*0.75)
         ],
         pathSides: new Set([
           Side.Bottom
         ])
       }
     ],
-    decorations: [],
+    decorations: [
+      {
+        decorationType: DecorationType.Altar,
+        position: new Vector(width/4, height/4)
+      }
+    ],
     freeSide: new Set([
       Side.Bottom
     ])
@@ -107,7 +117,7 @@ export const segmentTypeList: WorldSegment[] = [
   {
     width: width,
     height: height,
-    backgroundType: BackgroundType.PathStraightMoon,
+    backgroundType: BackgroundType.PathStraightVerticalMoon,
     paths: [
       {
         points: [
@@ -120,10 +130,53 @@ export const segmentTypeList: WorldSegment[] = [
         ])
       }
     ],
-    decorations: [],
+    decorations: [
+      {
+        decorationType: DecorationType.Beacon,
+        position: new Vector(width/3, -width/3)
+      },
+      {
+        decorationType: DecorationType.Rocks,
+        position: new Vector(width/3, width/3)
+      }
+    ],
     freeSide: new Set([
       Side.Top,
       Side.Bottom
+    ])
+  },
+  {
+    width: width,
+    height: height,
+    backgroundType: BackgroundType.PathStraightHorizontalMoon,
+    canSpawn: (x: number, y: number, side: Side, worldSegmentList: WorldSegmentContents[]): boolean => {
+      return worldSegmentList.length > 50;
+    },
+    paths: [
+      {
+        points: [
+          new Vector(0, height/2),
+          new Vector(width, height/2) 
+        ],
+        pathSides: new Set([
+          Side.Right,
+          Side.Left
+        ])
+      }
+    ],
+    decorations: [
+      {
+        decorationType: DecorationType.Drive,
+        position: new Vector(-width/3, -width/3)
+      },
+      {
+        decorationType: DecorationType.Fence,
+        position: new Vector(width/3, width/3)
+      }
+    ],
+    freeSide: new Set([
+      Side.Right,
+      Side.Left
     ])
   },
   {
@@ -144,7 +197,16 @@ export const segmentTypeList: WorldSegment[] = [
         ])
       }
     ],
-    decorations: [],
+    decorations: [
+      {
+        decorationType: DecorationType.Tanker,
+        position: new Vector(-width/3, width/3)
+      },
+      {
+        decorationType: DecorationType.Spikes,
+        position: new Vector(width/3, width/3)
+      }
+    ],
     freeSide: new Set([
       Side.Top,
       Side.Left
@@ -157,21 +219,34 @@ export const segmentTypeList: WorldSegment[] = [
     paths: [
       {
         points: [
-          new Vector(width/2, 0),
-          new Vector(width/2, height*0.35),
+          new Vector(width, height/2),
           new Vector(width*0.65, height/2),
-          new Vector(width, height/2) 
+          new Vector(width/2, height*0.35),
+          new Vector(width/2, 0),
         ],
         pathSides: new Set([
-          Side.Top,
-          Side.Right
+          Side.Right,
+          Side.Top
         ])
       }
     ],
-    decorations: [],
+    decorations: [
+      {
+        decorationType: DecorationType.Database,
+        position: new Vector(-width/3, width/3)
+      },
+      {
+        decorationType: DecorationType.Beacon,
+        position: new Vector(width/3, width/3)
+      },
+      {
+        decorationType: DecorationType.Rocks,
+        position: new Vector(width/3, -width/3)
+      }
+    ],
     freeSide: new Set([
-      Side.Top,
-      Side.Right
+      Side.Right,
+      Side.Top
     ])
   },
   {
@@ -192,7 +267,12 @@ export const segmentTypeList: WorldSegment[] = [
         ])
       }
     ],
-    decorations: [],
+    decorations: [
+      {
+        decorationType: DecorationType.Satellite,
+        position: new Vector(-width/3, -width/3)
+      }
+    ],
     freeSide: new Set([
       Side.Bottom,
       Side.Left
@@ -216,12 +296,41 @@ export const segmentTypeList: WorldSegment[] = [
         ])
       }
     ],
-    decorations: [],
+    decorations: [
+      {
+        decorationType: DecorationType.Drive,
+        position: new Vector(width/3, -width/3)
+      }
+    ],
     freeSide: new Set([
       Side.Bottom,
       Side.Right
     ])
   },
+  // {
+  //   width: width,
+  //   height: height,
+  //   backgroundType: BackgroundType.RightTurnBottomMoon,
+  //   paths: [
+  //     {
+  //       points: [
+  //         new Vector(width/2, height),
+  //         new Vector(width/2, height*0.65),
+  //         new Vector(width*0.65, height/2),
+  //         new Vector(width, height/2) 
+  //       ],
+  //       pathSides: new Set([
+  //         Side.Bottom,
+  //         Side.Right
+  //       ])
+  //     }
+  //   ],
+  //   decorations: [],
+  //   freeSide: new Set([
+  //     Side.Bottom,
+  //     Side.Right
+  //   ])
+  // },
   // TODO: Figure out how to path find these
   // {
   //   width: width,

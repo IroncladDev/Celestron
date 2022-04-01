@@ -12,23 +12,28 @@ export const enum Side {
 }
 // Target Type
 export const enum TargetType {
+  Random,
   Closest,
   Strongest,
   Farthest
 }
 // Specials
 export const enum Specials {
-  Testm
+  Test,
 }
 // Towers
 export const enum TowerType {
-  Test,
+  Basic,
+  Machine,
+  RailGun,
 }
 // Background
 export const enum BackgroundType {
   Moon,
   PathBaseMoon,
-  PathStraightMoon,
+  PathTeeMoon,
+  PathStraightVerticalMoon,
+  PathStraightHorizontalMoon,
   LeftTurnTopMoon,
   RightTurnTopMoon,
   LeftTurnBottomMoon,
@@ -62,6 +67,15 @@ export const enum EnemyType {
 // Decorations
 export const enum DecorationType {
   Path,
+  Altar,
+  Beacon,
+  Database,
+  Drive,
+  Fence,
+  Rocks,
+  Satellite,
+  Spikes,
+  Tanker
 }
 export interface DecorationDefinition {
   decorationType: DecorationType;
@@ -73,7 +87,7 @@ export interface SegmentPath {
   pathSides: Set<Side>;
   entranceSegment?: WorldSegmentContents;
   exitSegment?: WorldSegmentContents;
-  segment?: WorldSegment;
+  segment?: WorldSegmentContents;
 } 
 export interface WorldSegment {
   width: number;
@@ -114,5 +128,8 @@ export interface WorldContents {
 export const enum ParticleType{
   Fire,
   Smoke,
-  Spark
+  Spark,
+  Bullet,
+  MgunBullet,
+  RailgunBullet
 }
