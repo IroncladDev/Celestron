@@ -30,17 +30,14 @@ app.use(async (req, res, next) => {
 })
 
 app.get('/api/leaderboard', async (req, res) => {
-  const lb = await db.list();
-  let users = []
-  for (let i = 0; i < lb.length; i++) {
-    users.push([lb[i], await db.get(lb[i])])
-  }
-  res.send(users);
+  res.send(await db.get("lead"));
 });
 
 app.post('/api/highscore', async (req, res) => {
   if (!res.locals.isAuth) return res.send("Unauthorized");
   if (blacklisted.includes(res.locals.username)) return res.send("Go away");
+  let lead = await db.get("lead");
+  let me = await lead.findIndex(x => x[0] === req.headers["x-replit-user-name"])
   if (parseInt(req.body.score) > 500) return res.send("too big")
   try {
     if (
@@ -49,11 +46,12 @@ app.post('/api/highscore', async (req, res) => {
       req.body.segmentLength == (req.body.score + 5)
     ) {
       if(req.headers['x-replit-user-name']){
-        if(req.body.score > (await db.get(req.headers["x-replit-user-name"])))
-          await db.set(req.headers["x-replit-user-name"],  req.body.score);
+        if(req.body.score > lead[me][1]){
+          await db.set("lead",  [...lead.filter(x => x[0] !== req.headers["x-replit-user-name"]), [req.headers["x-replit-user-name"], req.body.score]]);
+        }
           res.json({success: true});
       } else res.json({success: false});}else{
-      await db.set(req.headers["x-replit-user-name"],  req.body.score);
+      await db.set("lead",  [...lead.filter(x => x[0] !== req.headers["x-replit-user-name"]), [req.headers["x-replit-user-name"], req.body.score]]);
         res.json({success: true});
     }
   } catch (e) {
@@ -62,11 +60,13 @@ app.post('/api/highscore', async (req, res) => {
 });
 
 app.get('/user-data', async (req, res) => {
+  let score = 0;
+  try{score=(await db.get("lead")).filter(x => x[0] === req.headers['x-replit-user-name'])[0][1];}catch(e){}
   res.json({
     name: req.headers['x-replit-user-name'] ? req.headers['x-replit-user-name'] : 'Anonymous',
-    score: await db.get(req.headers["x-replit-user-name"]) ?? 0
+    score
   });
-})
+});
 
 // Listen To App
 app.listen(8080, () => console.log('server up'));

@@ -318,6 +318,7 @@ const startGame = () => {
         world.towers.set(world.towers.size, world.towerMouse);
         world.towerMouse = null;
         activeTowerPlacement = null;
+        updateStore();
       }
     };
     p5.mouseWheel = function mouseWheel(event: WheelEvent) {
@@ -363,6 +364,7 @@ const startGame = () => {
     p5.draw = async function draw() {
       if (world.paused || world.gameOver) return;
       // Perform World Update
+      let localMoney = world.money;
       world.Update(p5.deltaTime, p5.frameCount);
       p5.background(0);
       p5.push();
@@ -509,6 +511,7 @@ const startGame = () => {
               if(sellTime >= 80){
                 world.money += Math.round(tower.cost * 0.75);
                 tower.dead = true;
+                updateStore();
                 sellTime = 0;
               }
             } else sellTime = 0;
@@ -910,6 +913,9 @@ const startGame = () => {
       }
 
       if (world.baseHealth <= 0 && !world.gameOver) {
+        // Set Game Over
+        world.paused = true;
+        world.gameOver = true;
         // Send score to lb
         await fetch('/api/highscore', {
           headers: {
@@ -930,8 +936,10 @@ const startGame = () => {
            if (btn.id != 'HomeBtn4') 
             btn.disabled = true;
         });
-        world.paused = true;
-        world.gameOver = true;
+      }
+      // Money
+      if (localMoney != world.money) {
+        updateStore();
       }
       //arrow movements here
       if(p5.keyIsDown(p5.UP_ARROW)) viewPort.y += 10;
@@ -940,8 +948,9 @@ const startGame = () => {
       if(p5.keyIsDown(p5.RIGHT_ARROW)) viewPort.x -= 10;
     };
     
-    p5.keyReleased = function keyReleased(){
-      if(p5.keyCode === 32){
+    p5.keyReleased = function keyReleased() {
+      if (world.paused) return;
+      if(p5.keyCode === 32) {
         if (msgBox.classList.contains('Hidden')) {
           world.newWave();
           waveCount.innerText = `${world.waveCount}`;
@@ -952,13 +961,10 @@ const startGame = () => {
           setMessage();
         }
       }
-
-      if(p5.keyCode === 27){
+      if(p5.keyCode === 27) {
         world.towerMouse = null;
-      }
-      
-      if(p5.keyCode === 187){
-        if (world.paused) return;
+      } 
+      if(p5.keyCode === 187) {
         const diffX = p5.width/2 - viewPort.x;
         const diffY = p5.height/2 - viewPort.y;
         const scaleValue = 1.1;
@@ -968,8 +974,7 @@ const startGame = () => {
         viewPort.y -= (dyScaled - diffY);
         viewPort.x -= (dxScaled - diffX);
       }
-      if(p5.keyCode === 189){
-        if (world.paused) return;
+      if(p5.keyCode === 189) {
         const diffX = p5.width/2 - viewPort.x;
         const diffY = p5.height/2 - viewPort.y;
         const scaleValue = 0.9;
@@ -982,6 +987,7 @@ const startGame = () => {
       if (p5.keyCode == 27 && world.towerMouse != null)
         world.towerMouse = null;
         activeTowerPlacement = null;
+      updateStore();
     };
     // Add Buttons
     const toggleGamePause = (forcePause = false) => {
@@ -1049,6 +1055,7 @@ const startGame = () => {
             } else if (storeState == StoreState.Tower) {
               activeTowerPlacement = purchase;
               world.towerMouse = new Tower(purchase.cost, <TowerType>purchase?.type, new Vector(0, 0), 0, purchase.level ?? 0);
+              updateStore();
             }
           }
         };

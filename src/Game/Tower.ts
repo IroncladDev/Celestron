@@ -44,13 +44,13 @@ export default class Tower {
         break;
       case TowerType.Machine:
         this.damage = 0.25 * ((this.level+1) * 1.1);
-        this.fireRate = 300 - ((this.level+1) - 25);
+        this.fireRate = 300 - ((this.level+1) - 20);
         this.speed = 25 - ((this.level+1) * 2.5);
         this.range = 150 + ((this.level+1) * 50);
         break;
       case TowerType.RailGun:
-        this.damage = 2.5 * ((this.level+1)*1.1);
-        this.fireRate = 2000 - ((this.level+1) * 100);
+        this.damage = 2.5 * ((this.level+1));
+        this.fireRate = 2000 - ((this.level+1) * 50);
         this.speed = 20 * 1.05 * (this.level+1);
         this.range = 250 * (this.level + 1);
         break;

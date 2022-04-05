@@ -142,16 +142,16 @@ const Scorpion2 = class extends Enemy {
 }
 const Wasp = class extends Enemy {
   public static Difficulty: number = 20;
-  public health: number = 15;
-  public maxHealth: number = 15
+  public health: number = 25;
+  public maxHealth: number = 25
   public scale: number = 1;
-  public speed: number = 6;
+  public speed: number = 5;
   constructor(position: Vector, path: SegmentPath) {
     super(EnemyType.Wasp, position, path);
   }
 }
 const TitanBeetle = class extends Enemy {
-  public static Difficulty: number = 28;
+  public static Difficulty: number = 40;
   public health: number = 50;
   public maxHealth: number = 50
   public scale: number = 1.5;
@@ -164,7 +164,7 @@ const ShieldStrong = class extends Enemy {
   public static Difficulty: number = 32;
   public health: number = 65;
   public scale: number = 1.25;
-  public maxHealth: number = 75
+  public maxHealth: number = 65
   public speed: number = 2;
   constructor(position: Vector, path: SegmentPath) {
     super(EnemyType.ShieldStrong, position, path);
@@ -172,8 +172,8 @@ const ShieldStrong = class extends Enemy {
 }
 const ShieldDefault = class extends Enemy {
   public static Difficulty: number = 57;
-  public health: number = 55;
-  public maxHealth: number = 65
+  public health: number = 70;
+  public maxHealth: number = 70
   public scale: number = 1;
   public speed: number = 3;
   constructor(position: Vector, path: SegmentPath) {
@@ -182,8 +182,8 @@ const ShieldDefault = class extends Enemy {
 }
 const FireShield = class extends Enemy {
   public static Difficulty: number = 76;
-  public health: number = 60;
-  public maxHealth: number = 70
+  public health: number = 80;
+  public maxHealth: number = 80
   public scale: number = 1.25;
   public speed: number = 3;
   constructor(position: Vector, path: SegmentPath) {
@@ -192,8 +192,8 @@ const FireShield = class extends Enemy {
 }
 const FireShieldGunner = class extends Enemy {
   public static Difficulty: number = 83;
-  public health: number = 70;
-  public maxHealth: number = 80
+  public health: number = 90;
+  public maxHealth: number = 90
   public scale: number = 1.5;
   public speed: number = 3;
   constructor(position: Vector, path: SegmentPath) {
@@ -211,41 +211,41 @@ const Troll = class extends Enemy {
   }
 }
 const GhostMantis = class extends Enemy {
-  public static Difficulty: number = 48;
-  public health: number = 100;
-  public maxHealth: number = 100
+  public static Difficulty: number = 80;
+  public health: number = 125;
+  public maxHealth: number = 125
   public scale: number = 1.75;
-  public speed: number = 10;
+  public speed: number = 3;
   constructor(position: Vector, path: SegmentPath) {
     super(EnemyType.GhostMantis, position, path);
   }
 }
 const Virus1 = class extends Enemy {
-  public static Difficulty: number = 52;
-  public health: number = 50;
-  public maxHealth: number = 50
+  public static Difficulty: number = 60;
+  public health: number = 30;
+  public maxHealth: number = 30
   public scale: number = 1.25;
-  public speed: number = 4;
+  public speed: number = 6;
   constructor(position: Vector, path: SegmentPath) {
     super(EnemyType.Virus1, position, path);
   }
 }
 const Virus2 = class extends Enemy {
-  public static Difficulty: number = 56;
-  public health: number = 75;
-  public maxHealth: number = 75
+  public static Difficulty: number = 70;
+  public health: number = 35;
+  public maxHealth: number = 35
   public scale: number = 1.25;
-  public speed: number = 7;
+  public speed: number = 8;
   constructor(position: Vector, path: SegmentPath) {
     super(EnemyType.Virus2, position, path);
   }
 }
 const Ship = class extends Enemy {
-  public static Difficulty: number = 120;
-  public health: number = 75;
-  public maxHealth: number = 75
+  public static Difficulty: number = 160;
+  public health: number = 100;
+  public maxHealth: number = 100
   public scale: number = 2;
-  public speed: number = 4;
+  public speed: number = 5;
   constructor(position: Vector, path: SegmentPath) {
     super(EnemyType.Ship, position, path);
   }
@@ -275,8 +275,8 @@ const Boss2 = class extends Enemy {
 const Spider = class extends Enemy {
   public static Difficulty: number = 72;
   public boss: boolean = true;
-  public health: number = 200;
-  public maxHealth: number = 200
+  public health: number = 150;
+  public maxHealth: number = 150
   public scale: number = 1.5;
   public speed: number = 4;
   constructor(position: Vector, path: SegmentPath) {
