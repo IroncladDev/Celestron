@@ -64,7 +64,7 @@ app.get('/user-data', async (req, res) => {
   try{score=(await db.get("lead")).filter(x => x[0] === req.headers['x-replit-user-name'])[0][1];}catch(e){}
   res.json({
     name: req.headers['x-replit-user-name'] ? req.headers['x-replit-user-name'] : 'Anonymous',
-    score
+    score:score
   });
 });
 
