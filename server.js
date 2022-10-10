@@ -9,6 +9,8 @@ const app = express();
 import cookieParser from "cookie-parser";
 const blacklisted = ["bramley", "bruhmley", "unnospid", "sharting", "kaskie", "og8hvo"];
 
+// Git change
+
 app.use(cookieParser());
 app.use(express.static('./dist/'));
 app.use(express.json());
